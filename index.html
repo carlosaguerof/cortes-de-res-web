@@ -174,12 +174,12 @@ h4 { margin: 0 0 8px; font-stretch: 75%; font-weight: 800; text-transform: upper
 .video .play::after { content: ""; position: absolute; left: 29px; top: 22px; border-left: 22px solid #fff; border-top: 14px solid transparent; border-bottom: 14px solid transparent; }
 .video-pie { margin: 8px 0 0; font-size: 13.5px; color: var(--muted); max-width: 760px; }
 .video-pie b { color: var(--ink); }
-/* Juego "¿Dónde está?" (idea de Seterra): aparece un nombre y hay que tocarlo en la res. */
+/* Juego "¿Dónde está el corte?" (idea de Seterra): aparece un nombre y hay que tocarlo en la res. */
 .cta-juego { justify-self: start; display: inline-flex; align-items: center; gap: 10px; margin-top: 6px; border: none; border-radius: 999px; background: var(--accent); color: #fff; padding: 11px 20px; font-size: 16px; font-weight: 750; cursor: pointer; box-shadow: 0 2px 10px rgb(179 38 30 / .25); }
 .cta-juego:hover { filter: brightness(1.08); }
 .cta-juego small { font-weight: 500; opacity: .9; font-size: 14px; }
 .juego { padding: 18px 22px 24px; display: grid; gap: 14px; }
-.juego h2 { font-family: var(--display); font-weight: 400; font-size: clamp(26px, 5vw, 36px); line-height: 1.05; margin: 0; }
+.juego h2 { font-family: var(--display); font-weight: 400; font-size: clamp(26px, 5vw, 36px); line-height: 1.05; margin: 0; padding-right: 80px; }
 .tablero { position: sticky; top: 0; z-index: 2; background: var(--surface); display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 10px 0; border-bottom: 1px solid var(--line); }
 .pregunta { flex: 1 1 260px; font-size: clamp(20px, 4.4vw, 28px); line-height: 1.15; font-weight: 600; }
 .pregunta b { font-family: var(--display); font-weight: 400; color: var(--accent); }
@@ -190,6 +190,7 @@ h4 { margin: 0 0 8px; font-stretch: 75%; font-weight: 800; text-transform: upper
 /* Al abrir el juego no hay uno elegido: los tres en grande, cada uno con la lista de lo que pregunta. */
 .elegir, .jugando { display: grid; gap: 14px; }
 .elegir[hidden], .jugando[hidden] { display: none; }
+.elige-juego { margin: 10px 0 2px; text-align: center; font-family: var(--display); font-weight: 400; font-size: clamp(24px, 5vw, 30px); line-height: 1.1; }
 .opciones { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
 .opcion { display: grid; align-content: start; gap: 8px; text-align: left; font: inherit; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; padding: 18px 18px 20px; cursor: pointer; }
 .opcion:hover, .opcion:focus-visible { border-color: var(--accent); }
@@ -310,7 +311,7 @@ if (POSTHOG_CLAVE) {
     <h1>Cortes de res</h1>
     <p class="lede">Los cortes como se piden en México: de dónde salen, cómo se comen, cuánto cuestan y cómo se llaman en otros países.</p>
     <ul class="stats" id="stats"></ul>
-    <button class="cta-juego" id="abrir-juego" type="button">Jugar: ¿Dónde está? <small>Encuentra los cortes en la res →</small></button>
+    <button class="cta-juego" id="abrir-juego" type="button">Jugar: ¿Dónde está el corte? <small>Encuentra los cortes en la res →</small></button>
   </div>
 </header>
 
@@ -357,11 +358,11 @@ if (POSTHOG_CLAVE) {
   <div class="cerrar-bar"><button class="cerrar" id="cerrar-juego" type="button">Salir ✕</button></div>
   <div class="juego">
     <div>
-      <h2 id="juego-t">¿Dónde está?</h2>
+      <h2 id="juego-t">¿Dónde está el corte?</h2>
       <p class="hint">Aparece un nombre: tócalo en la res. Si fallas te digo qué tocaste; al tercer error te marco la respuesta.</p>
     </div>
     <div class="elegir" id="juego-elegir">
-      <span class="lbl">Elige un juego</span>
+      <h3 class="elige-juego">Elige un juego</h3>
       <div class="opciones" id="juego-modos" role="group" aria-label="Qué jugar"></div>
     </div>
     <div class="jugando" id="juego-jugando" hidden>
@@ -940,7 +941,7 @@ if (POSTHOG_CLAVE) {
   cambioCompacto(esCompacto());
   observador.observe(grande);
 
-  // ── Juego "¿Dónde está?" (idea de Seterra) ──
+  // ── Juego "¿Dónde está el corte?" (idea de Seterra) ──
   // Aparece un nombre y hay que tocarlo en la res. Acierto: se pinta según cuántos errores costó y sigue la siguiente.
   // Error: se dice qué se tocó. Al tercer error se marca la respuesta. Al final: % a la primera, tiempo y mejor marca.
   const juegoDlg = document.getElementById("juego");
