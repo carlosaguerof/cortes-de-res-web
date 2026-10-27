@@ -164,8 +164,16 @@ h4 { margin: 0 0 8px; font-stretch: 75%; font-weight: 800; text-transform: upper
 .nota-box.ojo .cap { color: var(--warn); }
 .texto { font-size: 14px; margin: 0; color: var(--ink); }
 .links { display: flex; flex-wrap: wrap; gap: 6px; }
-.links button { border: 1.5px solid var(--line); background: var(--surface); border-radius: 999px; padding: 4px 12px; cursor: pointer; font-weight: 650; font-size: 13.5px; }
+/* Botones que llevan a otra ficha: la "›" al final dice "esto te lleva a otro lado" (la convención de iPhone y Android);
+   los filtros, que no llevan a ningún lado, no la llevan. Al tocarlos cambian de color un instante. */
+.links button { display: inline-flex; align-items: center; gap: 6px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 4px 10px 4px 12px; cursor: pointer; font-weight: 650; font-size: 13.5px; }
+.links button::after { content: "›"; font-size: 1.4em; line-height: 1; color: var(--muted); }
 .links button:hover { border-color: var(--accent); color: var(--accent); }
+.links button:hover::after { color: var(--accent); }
+.links button:active { background: var(--accent-soft); }
+/* En el recuadro del mapa, cada corte en su renglón, como un menú de destinos, fácil de tocar en el celular. */
+.elige .links { display: grid; gap: 6px; }
+.elige .links button { justify-content: space-between; width: 100%; min-height: 44px; border-radius: 10px; padding: 8px 12px 8px 14px; font-size: 15px; text-align: left; }
 .fuentes { margin: 0; padding-left: 18px; font-size: 13px; columns: 2; column-gap: 24px; }
 .fuentes li { break-inside: avoid; overflow-wrap: anywhere; }
 .etiquetas { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; font-size: 14px; color: var(--muted); }
@@ -293,7 +301,7 @@ footer p { padding-block: 18px 30px; margin: 0; font-size: 13px; color: var(--mu
 .mapa-grande .z.clic:hover, .mapa-grande .z.clic:focus { fill: var(--map-hover); outline: none; }
 .mapa-grande.dentro .int.clic:hover, .mapa-grande.dentro .int.clic:focus { fill: var(--map-hover); fill-opacity: 1; outline: none; }
 .elige[hidden] { display: none; }
-.elige { position: absolute; z-index: 5; width: max-content; max-width: min(300px, calc(100% - 16px)); background: var(--surface); border: 1px solid var(--line); border-radius: 4px; box-shadow: 0 6px 24px rgb(0 0 0 / .18); padding: 10px 12px; display: grid; gap: 8px; }
+.elige { position: absolute; z-index: 5; width: max-content; min-width: min(240px, calc(100% - 16px)); max-width: min(300px, calc(100% - 16px)); background: var(--surface); border: 1px solid var(--line); border-radius: 4px; box-shadow: 0 6px 24px rgb(0 0 0 / .18); padding: 10px 12px; display: grid; gap: 8px; }
 
 @media (max-width: 720px) {
   .cols { grid-template-columns: 1fr; }
@@ -620,7 +628,7 @@ if (POSTHOG_CLAVE) {
     const l = f.platillos || [];
     if (!l.length) return "";
     return `<section class="panel"><h4>Cómo se come en México ${bandera("MX")}</h4><ul class="platillos">${l.map(p =>
-      `<li>${p.ficha && byId[p.ficha] ? `<button type="button" class="ir" data-id="${p.ficha}">${esc(p.nombre)} →</button>` : `<b>${esc(p.nombre)}</b>`}${p.nota ? `<span>${esc(p.nota)}</span>` : ""}</li>`).join("")}</ul></section>`;
+      `<li>${p.ficha && byId[p.ficha] ? `<button type="button" class="ir" data-id="${p.ficha}">${esc(p.nombre)} ›</button>` : `<b>${esc(p.nombre)}</b>`}${p.nota ? `<span>${esc(p.nota)}</span>` : ""}</li>`).join("")}</ul></section>`;
   }
   function paises(f) {
     const l = f.en_otros_paises; if (!l || !l.length) return "";
