@@ -105,10 +105,22 @@ dialog::backdrop { background: rgb(10 14 12 / .6); }
 /* El botón queda encima de la ficha sin quitarle ancho: una barra pegajosa de alto cero. */
 .cerrar-bar { position: sticky; top: 0; height: 0; z-index: 3; display: flex; justify-content: flex-end; }
 .cerrar { margin: 10px 10px 0 0; height: max-content; border: 1px solid var(--line); background: var(--surface); border-radius: 3px; padding: 6px 12px; cursor: pointer; font-weight: 700; box-shadow: 0 2px 8px rgb(0 0 0 / .15); }
-.ficha { padding: 20px 24px 28px; display: grid; gap: 22px; }
-.galeria { display: grid; gap: 12px; }
-.fotos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.fotos.mas { grid-template-columns: repeat(auto-fill, minmax(min(100%, 180px), 1fr)); }
+.ficha { --pad: 24px; padding: 20px var(--pad) 28px; display: grid; gap: 22px; }
+/* Fotos en carrusel, como en Google Maps (lo pidió el founder): se deslizan de lado y cada una se acomoda al soltar.
+   La siguiente asoma en el borde para que se note que hay más; por eso el carrusel llega hasta la orilla de la ficha.
+   En computadora se ven dos y un pedazo de la tercera, con flechas; en celular, una completa y un pedazo de la siguiente. */
+.galeria { position: relative; }
+.carrusel { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--pad); overscroll-behavior-x: contain; scrollbar-width: none; margin-inline: calc(-1 * var(--pad)); padding-inline: var(--pad); }
+.carrusel::-webkit-scrollbar { display: none; }
+.carrusel .foto { flex: 0 0 calc(50% - 32px); scroll-snap-align: start; }
+.carrusel .foto figcaption { -webkit-line-clamp: 2; }
+.flecha { display: none; }
+@media (hover: hover) and (pointer: fine) {
+  .flecha { display: grid; place-items: center; position: absolute; top: 36%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); box-shadow: 0 2px 8px rgb(0 0 0 / .2); font-size: 24px; line-height: 1; cursor: pointer; }
+  .flecha.ant { left: -10px; }
+  .flecha.sig { right: -10px; }
+  .flecha[disabled] { opacity: 0; pointer-events: none; }
+}
 .foto { margin: 0; display: grid; gap: 6px; align-content: start; min-width: 0; }
 .foto .ph { border-radius: 3px; }
 /* Una foto más alta que el marco no se recorta: se ve completa sobre una copia borrosa de sí misma. */
@@ -286,14 +298,13 @@ footer p { padding-block: 18px 30px; margin: 0; font-size: 13px; color: var(--mu
 @media (max-width: 720px) {
   .cols { grid-template-columns: 1fr; }
   .fuentes { columns: 1; }
-  .ficha { padding: 16px 16px 24px; }
+  .ficha { --pad: 16px; padding: 16px var(--pad) 24px; }
   .orden { margin-left: 0; }
   .paises .nota { padding-left: 0; }
 }
 @media (max-width: 520px) {
   dialog { width: 100%; max-width: 100%; max-height: 100%; height: 100%; border-radius: 0; }
-  .fotos { grid-template-columns: 1fr; }
-  .fotos.mas { grid-template-columns: 1fr 1fr; }
+  .carrusel .foto { flex-basis: 84%; }
   .rate { grid-template-columns: 96px auto 1fr; }
 }
 @media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover { transform: none; } }
@@ -576,12 +587,22 @@ if (POSTHOG_CLAVE) {
     const alta = i.archivo && i.h > i.w * 0.8;
     return `<figure class="foto"><div class="ph${alta ? " alta" : ""}"${alta ? ` style="--fondo:url('${esc(i.archivo)}')"` : ""}>${img(i, `${f.nombre}: ${i.muestra || i.tipo}`)}</div><figcaption>${pie}</figcaption></figure>`;
   }
+  // Galería en carrusel: primero una cruda y la preparada, luego las demás.
   function galeria(f) {
-    const l = fotosDe[f.id] || [];
-    const principales = [l.find(i => i.tipo === "cruda"), l.find(i => i.tipo === "preparada")].filter(Boolean);
-    const resto = l.filter(i => !principales.includes(i));
-    return `<div class="galeria"><div class="fotos">${principales.map(i => figura(f, i)).join("")}</div>` +
-      (resto.length ? `<div class="fotos mas">${resto.map(i => figura(f, i)).join("")}</div>` : "") + `</div>`;
+    const todas = fotosDe[f.id] || [];
+    if (!todas.length) return "";
+    const principales = [todas.find(i => i.tipo === "cruda"), todas.find(i => i.tipo === "preparada")].filter(Boolean);
+    const l = [...principales, ...todas.filter(i => !principales.includes(i))];
+    return `<div class="galeria"><div class="carrusel" tabindex="0" aria-label="Fotos de ${esc(f.nombre)}">${l.map(i => figura(f, i)).join("")}</div>` +
+      `<button type="button" class="flecha ant" aria-label="Fotos anteriores" disabled>‹</button><button type="button" class="flecha sig" aria-label="Más fotos">›</button></div>`;
+  }
+  // Flechas del carrusel (solo con mouse): se esconden en los extremos.
+  function prepararCarrusel() {
+    const c = cuerpo.querySelector(".carrusel"); if (!c) return;
+    const [ant, sig] = cuerpo.querySelectorAll(".galeria .flecha");
+    const actualizar = () => { ant.disabled = c.scrollLeft <= 4; sig.disabled = c.scrollLeft + c.clientWidth >= c.scrollWidth - 4; };
+    c.addEventListener("scroll", actualizar, { passive: true });
+    requestAnimationFrame(actualizar);
   }
   const rate = (n, v) => `<div class="rate"><span>${n}</span>${sq(v)}<b>${v}</b></div>`;
   const host = u => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (e) { return u; } };
@@ -686,6 +707,7 @@ if (POSTHOG_CLAVE) {
     </div>`;
     const fig = cuerpo.querySelector(".mapa-ficha");
     resaltar(f, fig);
+    prepararCarrusel();
     abrirCapa(dlg, "#" + f.id);
     adaptar(fig);
     dlg.scrollTop = 0;
@@ -721,6 +743,11 @@ if (POSTHOG_CLAVE) {
   cuerpo.addEventListener("click", e => {
     const b = e.target.closest(".links button, .platillos .ir"); if (b) return abrir(b.dataset.id, "ficha");
     const yt = e.target.closest(".yt"); if (yt) return reproducir(yt.closest(".video"), e);
+    const fl = e.target.closest(".galeria .flecha");
+    if (fl) {
+      const c = fl.closest(".galeria").querySelector(".carrusel");
+      return c.scrollBy({ left: (fl.classList.contains("sig") ? 1 : -1) * c.clientWidth * 0.8, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    }
     const mas = e.target.closest(".mas-gente");
     if (mas) { mas.closest(".gente").querySelectorAll(".post[hidden]").forEach(p => { p.hidden = false; }); mas.hidden = true; }
   });
