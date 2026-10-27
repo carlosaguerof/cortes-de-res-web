@@ -1,0 +1,1095 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Cortes de res México</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Archivo:wdth,wght@62..125,400..800&display=swap">
+<style>
+/* Vitrina de carnicería: los cortes en rejilla como en el mostrador; la ficha abre como hoja completa.
+   Calificaciones en cuadritos de azulejo; rojo carnicería para lo que importa. */
+:root {
+  --bg: #F2F5F3; --surface: #FFFFFF; --ink: #18211D; --muted: #56645E; --line: #D8E0DB; --empty: #E1E7E3;
+  --accent: #B3261E; --accent-soft: #F8E4E2; --tile: #2D6A51; --tile-soft: #E1EEE7;
+  --warn: #855600; --warn-soft: #FBF0D8;
+  --map: #E5DBD7; --map-hover: #EDBDB6; --map-on: #E39488; --map-vacia: #F3EFED;
+  --j0: #8FD1AE; --j1: #F2E27A; --j2: #F2A65A; --j3: #E46F64;
+  --display: "Alfa Slab One", Rockwell, "Roboto Slab", Georgia, serif;
+  --body: "Archivo", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111715; --surface: #19211E; --ink: #E6ECE8; --muted: #9AA8A1; --line: #2B3632; --empty: #2A3430;
+    --accent: #EF6A60; --accent-soft: #3B201E; --tile: #66B893; --tile-soft: #1B3229;
+    --warn: #E6B05A; --warn-soft: #352A16;
+    --map: #313B36; --map-hover: #5B3532; --map-on: #8E3D35; --map-vacia: #222A27; color-scheme: dark;
+    --j0: #2E7552; --j1: #7D6F1E; --j2: #8C5420; --j3: #8E3D35;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111715; --surface: #19211E; --ink: #E6ECE8; --muted: #9AA8A1; --line: #2B3632; --empty: #2A3430;
+  --accent: #EF6A60; --accent-soft: #3B201E; --tile: #66B893; --tile-soft: #1B3229;
+  --warn: #E6B05A; --warn-soft: #352A16;
+  --map: #313B36; --map-hover: #5B3532; --map-on: #8E3D35; --map-vacia: #222A27; color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+a { color: var(--accent); }
+button, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.lbl, .eyebrow, dt, .cap { font-stretch: 75%; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: 11.5px; color: var(--muted); }
+.num { font-variant-numeric: tabular-nums; }
+
+/* Encabezado */
+.top { border-bottom: 3px solid var(--accent); background: var(--surface); }
+.top-in { padding-block: 28px 22px; display: grid; gap: 10px; }
+.eyebrow { margin: 0; color: var(--accent); }
+h1 { font-family: var(--display); font-weight: 400; font-size: clamp(34px, 6vw, 56px); line-height: 1; margin: 0; letter-spacing: .01em; text-wrap: balance; }
+.lede { margin: 0; max-width: 62ch; color: var(--muted); font-size: 16px; }
+.stats { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 14px; color: var(--muted); }
+.stats b { color: var(--ink); font-weight: 750; }
+
+/* Filtros: buscador, cómo lo vas a cocinar, zona de la res, precio y orden */
+.filtros { padding-block: 22px 0; display: grid; gap: 14px; }
+.search input { width: 100%; box-sizing: border-box; font: inherit; font-size: 16px; padding: 13px 16px; border: 1.5px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); }
+.search input:focus { border-color: var(--accent); outline: none; }
+.grupo { display: grid; gap: 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips button { border: 1.5px solid var(--line); background: var(--surface); padding: 7px 15px; border-radius: 999px; cursor: pointer; font-size: 14px; font-weight: 650; }
+.chips button:hover { border-color: var(--muted); }
+.chips button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chips .n { font-weight: 500; opacity: .7; margin-left: 4px; font-variant-numeric: tabular-nums; }
+.fila { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: end; }
+.sel { display: grid; gap: 6px; }
+.selw { position: relative; display: inline-block; }
+.selw::after { content: ""; position: absolute; right: 14px; top: 50%; width: 7px; height: 7px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: translateY(-70%) rotate(45deg); pointer-events: none; }
+.sel select { appearance: none; -webkit-appearance: none; border: 1.5px solid var(--line); background: var(--surface); border-radius: 999px; padding: 8px 36px 8px 15px; font-size: 14px; font-weight: 650; cursor: pointer; }
+.sel select:hover { border-color: var(--muted); }
+.sel select.activo { border-color: var(--ink); }
+.orden { margin-left: auto; }
+.resumen { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 16px; padding-block: 14px 16px; margin-top: 4px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+.resumen b { color: var(--ink); }
+.limpiar { border: none; background: none; padding: 0; color: var(--accent); font-weight: 650; text-decoration: underline; cursor: pointer; }
+.limpiar[hidden] { display: none; }
+
+/* Rejilla de cortes */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 16px; padding-bottom: 40px; }
+.card { display: flex; flex-direction: column; text-align: left; padding: 0; border: 1px solid var(--line); background: var(--surface); border-radius: 4px; overflow: hidden; cursor: pointer; transition: transform .15s, border-color .15s; }
+.card:hover { border-color: var(--muted); transform: translateY(-2px); }
+.ph { aspect-ratio: 4 / 3; background: var(--empty); position: relative; overflow: hidden; max-width: 100%; }
+.ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ph .nofoto { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: 13px; text-align: center; padding: 12px; }
+.cb { padding: 12px 14px 14px; display: grid; gap: 6px; flex: 1; align-content: start; }
+.card h3 { font-family: var(--display); font-weight: 400; font-size: 22px; line-height: 1.1; margin: 0; }
+.aka { margin: 0; font-size: 13px; color: var(--muted); min-height: 1.5em; }
+.barras { display: grid; gap: 4px; margin: 6px 0 0; padding-top: 10px; border-top: 1px solid var(--line); font-size: 13px; }
+.barras div { display: grid; grid-template-columns: 70px auto; align-items: center; gap: 8px; }
+.cf { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); margin-top: 6px; }
+.price { font-weight: 800; letter-spacing: .04em; color: var(--ink); }
+.price .off { color: var(--line); }
+.chip { display: inline-block; font-size: 11.5px; font-weight: 700; font-stretch: 80%; text-transform: uppercase; letter-spacing: .05em; padding: 2px 7px; border-radius: 2px; background: var(--tile-soft); color: var(--tile); }
+.chip.media, .chip.aproximado { background: var(--warn-soft); color: var(--warn); }
+.chip.baja, .chip.no_hay { background: var(--accent-soft); color: var(--accent); }
+.vacio { padding: 40px 0; color: var(--muted); }
+
+/* Ficha */
+dialog { width: min(1000px, calc(100% - 32px)); max-height: calc(100% - 32px); padding: 0; border: none; border-radius: 6px; background: var(--surface); color: var(--ink); box-sizing: border-box; }
+dialog::backdrop { background: rgb(10 14 12 / .6); }
+/* El botón queda encima de la ficha sin quitarle ancho: una barra pegajosa de alto cero. */
+.cerrar-bar { position: sticky; top: 0; height: 0; z-index: 3; display: flex; justify-content: flex-end; }
+.cerrar { margin: 10px 10px 0 0; height: max-content; border: 1px solid var(--line); background: var(--surface); border-radius: 3px; padding: 6px 12px; cursor: pointer; font-weight: 700; box-shadow: 0 2px 8px rgb(0 0 0 / .15); }
+.ficha { padding: 20px 24px 28px; display: grid; gap: 22px; }
+.galeria { display: grid; gap: 12px; }
+.fotos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.fotos.mas { grid-template-columns: repeat(auto-fill, minmax(min(100%, 180px), 1fr)); }
+.foto { margin: 0; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.foto .ph { border-radius: 3px; }
+.foto figcaption { font-size: 13px; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.foto figcaption b { color: var(--ink); }
+.cabeza { display: grid; gap: 6px; }
+.cabeza h2 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 5vw, 44px); line-height: 1.05; margin: 0; text-wrap: balance; }
+.cabeza .aka { font-size: 14.5px; min-height: 0; }
+.desc { font-size: 17px; line-height: 1.55; margin: 0; max-width: 68ch; }
+.cols { display: grid; grid-template-columns: 1.1fr 1fr; gap: 28px; }
+.cols > div { display: grid; gap: 22px; align-content: start; min-width: 0; }
+h4 { margin: 0 0 8px; font-stretch: 75%; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; font-size: 12.5px; color: var(--accent); }
+.panel { background: var(--bg); border-radius: 4px; padding: 14px 16px; }
+.rates { display: grid; gap: 6px; }
+.rate { display: grid; grid-template-columns: 110px auto 1fr; gap: 10px; align-items: center; font-size: 14px; }
+.rate b { font-variant-numeric: tabular-nums; }
+.sq { display: inline-flex; gap: 3px; }
+.sq i { width: 14px; height: 14px; border-radius: 2px; background: var(--empty); }
+.sq i.on { background: var(--accent); }
+.barras .sq i { width: 12px; height: 12px; }
+.nota-escala { margin: 6px 0 0; font-size: 12.5px; color: var(--muted); }
+.datos { display: grid; grid-template-columns: max-content 1fr; gap: 8px 14px; margin: 0; font-size: 14px; }
+.datos dt { padding-top: 2px; font-size: 11px; }
+.datos dd { margin: 0; min-width: 0; }
+.paises { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 14px; }
+.paises li { display: grid; gap: 2px; }
+.paises .pn { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; }
+.paises .pais { font-stretch: 75%; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: 11.5px; color: var(--muted); min-width: 112px; }
+.paises .nombre { font-weight: 700; }
+.paises .tb, .paises .nota { color: var(--muted); font-size: 13px; margin: 0; }
+.paises .nota { padding-left: 120px; }
+.nota-box { border-left: 3px solid var(--tile); background: var(--tile-soft); padding: 10px 14px; border-radius: 0 3px 3px 0; font-size: 14.5px; }
+.nota-box.ojo { border-color: var(--warn); background: var(--warn-soft); }
+.nota-box p { margin: 2px 0 0; }
+.nota-box .cap { color: var(--tile); }
+.nota-box.ojo .cap { color: var(--warn); }
+.texto { font-size: 14px; margin: 0; color: var(--ink); }
+.unis { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 14px; }
+.unis .muted { color: var(--muted); }
+.links { display: flex; flex-wrap: wrap; gap: 6px; }
+.links button { border: 1.5px solid var(--line); background: var(--surface); border-radius: 999px; padding: 4px 12px; cursor: pointer; font-weight: 650; font-size: 13.5px; }
+.links button:hover { border-color: var(--accent); color: var(--accent); }
+.fuentes { margin: 0; padding-left: 18px; font-size: 13px; columns: 2; column-gap: 24px; }
+.fuentes li { break-inside: avoid; overflow-wrap: anywhere; }
+.etiquetas { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; font-size: 14px; color: var(--muted); }
+.hermanos { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.hermanos .lbl { margin-right: 2px; }
+.gente-nota { margin: -2px 0 12px; font-size: 13.5px; color: var(--muted); max-width: 70ch; }
+.feed { columns: 2 280px; column-gap: 12px; }
+/* Comentarios: solo la frase y, abajo y en pequeño, de dónde viene. */
+.post { break-inside: avoid; margin: 0 0 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); padding: 11px 13px 8px; display: grid; gap: 4px; }
+.post .txt { margin: 0; font-size: 15px; line-height: 1.45; }
+.post .ver { font-size: 11.5px; color: var(--muted); text-decoration: none; justify-self: start; }
+.post .ver:hover { text-decoration: underline; }
+.mas-gente { border: 1.5px solid var(--line); background: var(--surface); border-radius: 999px; padding: 7px 15px; cursor: pointer; font-weight: 650; font-size: 14px; }
+.post[hidden], .mas-gente[hidden] { display: none; }
+.video { position: relative; aspect-ratio: 16 / 9; max-width: 760px; background: #000; border-radius: 4px; overflow: hidden; }
+.video iframe, .video .yt { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video .yt { display: block; cursor: pointer; background: #000; }
+.video .yt img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: .88; transition: opacity .15s; }
+.video .yt:hover img { opacity: 1; }
+.video .play { position: absolute; left: 50%; top: 50%; width: 72px; height: 72px; transform: translate(-50%, -50%); border-radius: 50%; background: rgb(0 0 0 / .72); }
+.video .play::after { content: ""; position: absolute; left: 29px; top: 22px; border-left: 22px solid #fff; border-top: 14px solid transparent; border-bottom: 14px solid transparent; }
+.video .aviso { position: absolute; inset: 0; display: grid; place-content: center; gap: 8px; padding: 20px; text-align: center; color: #fff; background: #111; font-size: 15px; }
+.video .aviso a { color: #fff; font-weight: 700; }
+.video-pie { margin: 8px 0 0; font-size: 13.5px; color: var(--muted); max-width: 760px; }
+.video-pie b { color: var(--ink); }
+/* Juego "¿Dónde está?" (idea de Seterra): aparece un nombre y hay que tocarlo en la res. */
+.cta-juego { justify-self: start; display: inline-flex; align-items: center; gap: 10px; margin-top: 6px; border: none; border-radius: 999px; background: var(--accent); color: #fff; padding: 11px 20px; font-size: 16px; font-weight: 750; cursor: pointer; box-shadow: 0 2px 10px rgb(179 38 30 / .25); }
+.cta-juego:hover { filter: brightness(1.08); }
+.cta-juego small { font-weight: 500; opacity: .9; font-size: 14px; }
+.juego { padding: 18px 22px 24px; display: grid; gap: 14px; }
+.juego h2 { font-family: var(--display); font-weight: 400; font-size: clamp(26px, 5vw, 36px); line-height: 1.05; margin: 0; }
+.tablero { position: sticky; top: 0; z-index: 2; background: var(--surface); display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.pregunta { flex: 1 1 260px; font-size: clamp(20px, 4.4vw, 28px); line-height: 1.15; font-weight: 600; }
+.pregunta b { font-family: var(--display); font-weight: 400; color: var(--accent); }
+.marcador { display: flex; gap: 14px; align-items: center; font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.marcador b { color: var(--ink); }
+.reiniciar { border: 1.5px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 14px; font-weight: 650; cursor: pointer; }
+.dice { min-height: 1.5em; margin: 0; font-size: 15px; color: var(--muted); }
+.dice.mal { color: var(--accent); }
+.juego-mapa svg { max-width: 900px; margin: 0 auto; }
+.juego-mapa .pz { display: none; }
+.juego-mapa .z, .juego-mapa .int { cursor: pointer; }
+.juego-mapa .hit { fill: transparent; stroke: transparent; pointer-events: all; cursor: pointer; }
+.juego-mapa:not(.dentro) .int-hit { display: none; }
+.juego-mapa.dentro .hit:not(.int-hit) { display: none; }
+.juego-mapa .j0 { fill: var(--j0) !important; fill-opacity: 1 !important; }
+.juego-mapa .j1 { fill: var(--j1) !important; fill-opacity: 1 !important; }
+.juego-mapa .j2 { fill: var(--j2) !important; fill-opacity: 1 !important; }
+.juego-mapa .j3 { fill: var(--j3) !important; fill-opacity: 1 !important; }
+.juego-mapa .hit.j0, .juego-mapa .hit.j1, .juego-mapa .hit.j2, .juego-mapa .hit.j3 { fill: transparent !important; }
+.juego-mapa .mal { fill: #8f9895 !important; }
+.juego-mapa .pista { stroke: var(--accent) !important; stroke-width: 5px !important; stroke-dasharray: none !important; animation: latido 1s ease-in-out infinite; }
+@keyframes latido { 50% { stroke-opacity: .25; } }
+.juego-mapa .fugaz { font-family: var(--body); font-size: 15px; font-weight: 750; fill: var(--ink); text-anchor: middle; paint-order: stroke; stroke: var(--surface); stroke-width: 5px; stroke-linejoin: round; pointer-events: none; }
+.juego-mapa.compacto .fugaz { font-size: 34px; stroke-width: 9px; }
+.leyenda-j { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12.5px; color: var(--muted); }
+.leyenda-j i { display: inline-block; width: 11px; height: 11px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+.resultado { border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px; display: grid; gap: 10px; background: var(--bg); }
+.resultado[hidden] { display: none; }
+.resultado .grande { font-family: var(--display); font-size: clamp(30px, 7vw, 44px); line-height: 1; }
+.resultado .marca { color: var(--tile); font-weight: 700; }
+.acciones { display: flex; flex-wrap: wrap; gap: 8px; }
+.acciones .principal { border: none; background: var(--ink); color: var(--bg); border-radius: 999px; padding: 9px 18px; font-weight: 750; cursor: pointer; }
+@media (prefers-reduced-motion: reduce) { .juego-mapa .pista { animation: none; } }
+footer { border-top: 1px solid var(--line); }
+footer p { padding-block: 18px 30px; margin: 0; font-size: 13px; color: var(--muted); max-width: 90ch; }
+
+/* Mapa de la res (el mismo dibujo en "Explora la res" y en cada ficha) */
+.mapa { margin: 0; display: grid; gap: 6px; }
+.mapa svg { width: 100%; height: auto; display: block; }
+.mapa .base, .mapa .z { fill: var(--map); }
+.mapa .z { stroke: var(--surface); stroke-width: 2.5; }
+.mapa .z.vacia { fill: var(--map-vacia); }
+.mapa .z.on { fill: var(--map-on); }
+.mapa .cola { stroke: var(--muted); stroke-width: 1.5; }
+.mapa .prim { fill: none; stroke: var(--ink); stroke-opacity: .5; stroke-width: 2; stroke-linejoin: round; pointer-events: none; }
+.mapa .contorno { fill: none; stroke: var(--muted); stroke-width: 2; }
+.mapa .ojo { fill: var(--ink); }
+.mapa .int { display: none; fill: var(--map-on); fill-opacity: .85; stroke: var(--ink); stroke-width: 2; stroke-dasharray: 6 4; }
+.mapa .int.on { display: inline; }
+.mapa .pz path { fill: none; stroke: var(--muted); stroke-width: 1.5; }
+.mapa .pz text { font-family: var(--body); font-size: 13px; font-weight: 750; font-stretch: 80%; letter-spacing: .1em; fill: var(--muted); }
+.mapa .lbz { font-family: var(--body); font-size: 13px; font-weight: 700; fill: var(--ink); text-anchor: middle; pointer-events: none; }
+.mapa:not(.dentro) .lbz.int-l { display: none; }
+.mapa.dentro .lbz.ext-l { display: none; }
+.mapa.dentro .z { opacity: .4; pointer-events: none; }
+.mapa.dentro .int { display: inline; fill: var(--surface); fill-opacity: .92; }
+.mapa.dentro .int.vacia { display: none; }
+.mapa.dentro .int.on { fill: var(--map-on); fill-opacity: 1; }
+.mapa.dentro .lbz.int-l { paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; }
+.mapa.dentro .lbz.int-l.on { stroke: var(--map-on); }
+.mapa figcaption { font-size: 13.5px; color: var(--muted); }
+.mapa figcaption b { color: var(--ink); font-weight: 650; }
+.mapa-ficha svg { max-width: 820px; }
+/* Compacto (pantalla angosta): el dibujo cabe completo pero los nombres no se leerían,
+   así que solo se ve el nombre de lo que está en color, más grande. */
+.mapa.compacto .lbz:not(.on), .mapa.compacto .pz { display: none; }
+.mapa.compacto .lbz.on { font-size: 32px; paint-order: stroke; stroke: var(--map-on); stroke-width: 8px; stroke-linejoin: round; }
+.mapa.compacto.dentro .lbz.on { stroke: var(--map-on); }
+
+/* Explora la res: el mapa grande como menú */
+.explora { background: var(--surface); border-bottom: 1px solid var(--line); }
+.explora-in { position: relative; padding-block: 22px 16px; display: grid; gap: 10px; }
+.explora-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 10px 20px; }
+.explora h2 { font-family: var(--display); font-weight: 400; font-size: 28px; line-height: 1.1; margin: 0; }
+.hint { margin: 2px 0 0; color: var(--muted); font-size: 14px; max-width: 80ch; }
+.seg { display: flex; flex-wrap: wrap; gap: 4px; }
+.seg button { border: 1.5px solid var(--line); background: var(--surface); padding: 6px 13px; border-radius: 999px; cursor: pointer; font-size: 13.5px; font-weight: 650; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.mapa-grande { min-width: 0; }
+.mapa-grande svg { max-width: 900px; margin: 0 auto; }
+.zonas-chips, .zona-panel { display: none; }
+.explora-in.compacto .zonas-chips { display: grid; gap: 8px; }
+.explora-in.compacto .zona-panel:not([hidden]) { display: grid; gap: 8px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); }
+.zona-panel .titulo { font-family: var(--display); font-size: 20px; line-height: 1.1; }
+.mapa-grande .clic { cursor: pointer; }
+.mapa-grande .z.clic:hover, .mapa-grande .z.clic:focus { fill: var(--map-hover); outline: none; }
+.mapa-grande.dentro .int.clic:hover, .mapa-grande.dentro .int.clic:focus { fill: var(--map-hover); fill-opacity: 1; outline: none; }
+.elige[hidden] { display: none; }
+.elige { position: absolute; z-index: 5; width: max-content; max-width: min(300px, calc(100% - 16px)); background: var(--surface); border: 1px solid var(--line); border-radius: 4px; box-shadow: 0 6px 24px rgb(0 0 0 / .18); padding: 10px 12px; display: grid; gap: 8px; }
+
+@media (max-width: 720px) {
+  .cols { grid-template-columns: 1fr; }
+  .fuentes { columns: 1; }
+  .ficha { padding: 16px 16px 24px; }
+  .orden { margin-left: 0; }
+  .paises .nota { padding-left: 0; }
+}
+@media (max-width: 520px) {
+  dialog { width: 100%; max-width: 100%; max-height: 100%; height: 100%; border-radius: 0; }
+  .fotos { grid-template-columns: 1fr; }
+  .fotos.mas { grid-template-columns: 1fr 1fr; }
+  .rate { grid-template-columns: 96px auto 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover { transform: none; } }
+</style>
+
+<header class="top">
+  <div class="wrap top-in">
+    <p class="eyebrow">Piloto México · borrador para revisión</p>
+    <h1>Cortes de res</h1>
+    <p class="lede">Los cortes como se piden en México: de dónde salen, cómo se comen, cuánto cuestan y cómo se llaman en otros países.</p>
+    <ul class="stats" id="stats"></ul>
+    <button class="cta-juego" id="abrir-juego" type="button">Jugar: ¿Dónde está? <small>Encuentra los cortes en la res →</small></button>
+  </div>
+</header>
+
+<section class="explora" aria-labelledby="explora-t">
+  <div class="wrap explora-in" id="explora-in">
+    <div class="explora-top">
+      <div>
+        <h2 id="explora-t">Explora la res</h2>
+        <p class="hint" id="capa-nota"></p>
+      </div>
+      <div class="seg" id="capa" role="group" aria-label="Qué partes mostrar">
+        <button type="button" data-v="fuera" aria-pressed="true">Por fuera</button>
+        <button type="button" data-v="dentro" aria-pressed="false">Por dentro</button>
+      </div>
+    </div>
+    <div class="mapa mapa-grande" id="mapa-grande"></div>
+    <div class="zona-panel" id="zona-panel" aria-live="polite" hidden></div>
+    <div class="zonas-chips"><span class="lbl">Zonas de la res</span><div class="chips" id="zonas-chips"></div></div>
+    <div class="elige" id="elige" hidden></div>
+  </div>
+</section>
+
+<main>
+  <div class="wrap filtros">
+    <label class="search"><span class="sr">Buscar corte</span>
+      <input id="q" type="search" placeholder="Busca un corte o un nombre de otro país: arrachera, skirt, entraña…" autocomplete="off">
+    </label>
+    <div class="grupo"><span class="lbl" id="cocina-t">¿Cómo lo vas a cocinar?</span><div class="chips" id="f-cocina" role="group" aria-labelledby="cocina-t"></div></div>
+    <div class="fila">
+      <label class="sel"><span class="lbl">Zona de la res</span><span class="selw"><select id="f-zona"></select></span></label>
+      <label class="sel"><span class="lbl">Precio por kilo</span><span class="selw"><select id="f-precio"></select></span></label>
+      <label class="sel orden"><span class="lbl">Ordenar</span><span class="selw"><select id="f-orden"></select></span></label>
+    </div>
+    <div class="resumen" aria-live="polite"><span id="explica"></span><button class="limpiar" id="limpiar" type="button" hidden>Quitar filtros</button></div>
+  </div>
+  <div class="wrap"><div class="grid" id="grid"></div></div>
+</main>
+
+<footer>
+  <div class="wrap"><p>Generado desde <code>output/data/mx_fichas.json</code> con <code>build_web.py</code>. Suavidad y sabor van del 1 al 5 y suponen el corte preparado como se acostumbra en México. Precio de súper, octubre 2026 (MXN por kilo): $ menos de 200 · $$ 200–270 · $$$ 270–340 · $$$$ 340–480 · $$$$$ más de 480. Uso interno: muchas fotos no tienen licencia para publicarse.</p></div>
+</footer>
+
+<dialog id="juego" class="juego-dlg" aria-labelledby="juego-t">
+  <div class="cerrar-bar"><button class="cerrar" id="cerrar-juego" type="button">Salir ✕</button></div>
+  <div class="juego">
+    <div>
+      <h2 id="juego-t">¿Dónde está?</h2>
+      <p class="hint">Aparece un nombre: tócalo en la res. Si fallas te digo qué tocaste; al tercer error te marco la respuesta.</p>
+    </div>
+    <div class="chips" id="juego-modos" role="group" aria-label="Qué jugar"></div>
+    <div class="tablero">
+      <div class="pregunta" id="juego-pregunta" aria-live="polite"></div>
+      <div class="marcador"><span><b id="juego-van">0</b> de <span id="juego-total">0</span></span><span id="juego-reloj">0:00</span>
+        <button class="reiniciar" id="juego-reiniciar" type="button">Reiniciar</button></div>
+    </div>
+    <p class="dice" id="juego-dice" aria-live="polite"></p>
+    <div class="mapa juego-mapa" id="juego-mapa"></div>
+    <div class="leyenda-j" aria-hidden="true"><span><i style="background:var(--j0)"></i>A la primera</span><span><i style="background:var(--j1)"></i>1 error</span><span><i style="background:var(--j2)"></i>2 errores</span><span><i style="background:var(--j3)"></i>Con pista</span></div>
+    <div class="resultado" id="juego-resultado" hidden></div>
+  </div>
+</dialog>
+
+<dialog id="ficha" aria-labelledby="ficha-nombre">
+  <div class="cerrar-bar"><button class="cerrar" id="cerrar" type="button">Cerrar ✕</button></div>
+  <div id="ficha-body"></div>
+</dialog>
+
+<script src="data.js"></script>
+<script>
+(function () {
+  const { fichas, universales, fotos, mapa } = window.DATA;
+  const uni = Object.fromEntries(universales.map(u => [u.id, u]));
+  const byId = Object.fromEntries(fichas.map(f => [f.id, f]));
+  // Fotos por corte: primero cruda y preparada, luego las demás en el orden en que vienen.
+  const ORDEN_FOTO = { cruda: 0, preparada: 1 };
+  const fotosDe = {};
+  fotos.forEach((i, n) => (fotosDe[i.cut_id] ||= []).push({ ...i, n }));
+  Object.values(fotosDe).forEach(l => l.sort((a, b) => (ORDEN_FOTO[a.tipo] ?? 2) - (ORDEN_FOTO[b.tipo] ?? 2) || a.n - b.n));
+
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const norm = s => String(s).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  const corto = s => s.replace(/\s*\([^)]*\)/g, "").trim();
+
+  // Cómo se cocina: los métodos de cada ficha agrupados como se pide en la carnicería ("para asar", "para guisar").
+  const COCINA = [
+    ["asar", "Para asar", ["Parrilla", "Parrilla (fuego indirecto)", "Ahumado"]],
+    ["sarten", "En sartén o plancha", ["Plancha", "Sartén", "Comal", "Fritura"]],
+    ["guisar", "Guisado o en caldo", ["Olla", "Guiso", "Olla exprés", "Vapor", "Barbacoa", "Confitado en grasa (cazo)"]],
+    ["horno", "Al horno", ["Horno", "Horno + sellado"]],
+  ];
+  // Precio por kilo, con las bandas de specs/ficha.md.
+  const PRECIOS = [
+    ["todos", "Cualquier precio", () => true],
+    ["bajo", "Menos de $270", p => p <= 2],
+    ["medio", "$270 a $480", p => p === 3 || p === 4],
+    ["alto", "Más de $480", p => p === 5],
+  ];
+  const ORDENES = [
+    ["az", "A–Z", (a, b) => a.nombre.localeCompare(b.nombre, "es")],
+    ["suave", "Más suave", (a, b) => b.suavidad - a.suavidad || b.sabor - a.sabor],
+    ["sabor", "Más sabor", (a, b) => b.sabor - a.sabor || b.suavidad - a.suavidad],
+    ["barato", "Más barato", (a, b) => a.precio - b.precio],
+  ];
+  const REL = { igual: "Igual", aproximado: "Aproximado", parte_de: "Parte de", combinacion: "Combinación", formato: "Formato" };
+  const REL_PAIS = { igual: "Igual", aproximado: "Parecido", no_hay: "No se vende así" };
+  const PAIS = { US: "Estados Unidos", AR: "Argentina", ES: "España", BR: "Brasil", IT: "Italia", FR: "Francia", UY: "Uruguay", CO: "Colombia", PE: "Perú", CL: "Chile", JP: "Japón" };
+  const TIPO_FOTO = { cruda: "Cruda", preparada: "Preparada", cocinando: "En el fuego", plato: "Otra forma de comerla", contexto: "Contexto" };
+
+  // Zona de la res de cada U-ID, leída del dibujo (data-pieza).
+  const plantilla = new DOMParser().parseFromString(mapa, "image/svg+xml");
+  const piezaDeU = {};
+  const ZONAS = [];
+  plantilla.querySelectorAll("[data-u][data-pieza]").forEach(el => {
+    const ps = el.getAttribute("data-pieza").split(" ").filter(Boolean);
+    ps.forEach(p => { if (!ZONAS.includes(p)) ZONAS.push(p); });
+    el.getAttribute("data-u").split(" ").filter(Boolean).forEach(u => { piezaDeU[u] ||= new Set(); ps.forEach(p => piezaDeU[u].add(p)); });
+  });
+  const conComponentes = f => [...new Set(f.universal.flatMap(u => [u, ...(uni[u]?.componentes || [])]))];
+
+  // Nombres en México (sin los de otros países, que van en su propia sección).
+  function nombresMX(f) {
+    const fuera = new Set((f.en_otros_paises || []).flatMap(p => [p.nombre, ...(p.otros || [])]).filter(Boolean).map(s => norm(corto(s))));
+    return (f.otros_nombres || []).filter(s =>
+      !/\((AR|ES|USA|EE\. ?UU\.|BR)\b|argentin|españa|\(Argentina/i.test(s) && !fuera.has(norm(corto(s))));
+  }
+
+  fichas.forEach(f => {
+    f.cocina = COCINA.filter(([, , ms]) => f.metodos.some(m => ms.includes(m))).map(([k]) => k);
+    f.zonas = [...new Set(conComponentes(f).flatMap(u => [...(piezaDeU[u] || [])]))];
+    f.mx = nombresMX(f);
+  });
+
+  const estado = { q: "", cocina: "todos", zona: "todas", precio: "todos", orden: "az" };
+
+  // Encabezado
+  document.getElementById("stats").innerHTML =
+    `<li><b class="num">${fichas.length}</b> cortes</li>` +
+    `<li><b class="num">${ZONAS.length}</b> zonas de la res</li>` +
+    `<li><b class="num">${fotos.length}</b> fotos</li>`;
+
+  // Controles
+  const cocinaEl = document.getElementById("f-cocina");
+  const zonaEl = document.getElementById("f-zona");
+  const precioEl = document.getElementById("f-precio");
+  const ordenEl = document.getElementById("f-orden");
+  const cuenta = (k, v) => fichas.filter(f => k === "cocina" ? f.cocina.includes(v) : f.zonas.includes(v)).length;
+  cocinaEl.innerHTML = [["todos", "Como sea"], ...COCINA].map(([v, t]) =>
+    `<button type="button" data-v="${v}" aria-pressed="${estado.cocina === v}">${esc(t)}${v === "todos" ? "" : `<span class="n">${cuenta("cocina", v)}</span>`}</button>`).join("");
+  zonaEl.innerHTML = `<option value="todas">Toda la res</option>` +
+    ZONAS.filter(z => cuenta("zona", z)).map(z => `<option value="${esc(z)}">${esc(z)} (${cuenta("zona", z)})</option>`).join("");
+  precioEl.innerHTML = PRECIOS.map(([v, t]) => `<option value="${v}">${esc(t)}</option>`).join("");
+  ordenEl.innerHTML = ORDENES.map(([v, t]) => `<option value="${v}">${esc(t)}</option>`).join("");
+
+  cocinaEl.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    estado.cocina = b.dataset.v;
+    pintar();
+  });
+  zonaEl.addEventListener("change", () => { estado.zona = zonaEl.value; pintar(); });
+  precioEl.addEventListener("change", () => { estado.precio = precioEl.value; pintar(); });
+  ordenEl.addEventListener("change", () => { estado.orden = ordenEl.value; pintar(); });
+  document.getElementById("q").addEventListener("input", e => { estado.q = e.target.value; pintar(); });
+  document.getElementById("limpiar").addEventListener("click", () => {
+    Object.assign(estado, { q: "", cocina: "todos", zona: "todas", precio: "todos" });
+    document.getElementById("q").value = "";
+    pintar();
+  });
+
+  const indice = Object.fromEntries(fichas.map(f => [f.id, norm([
+    f.nombre, ...f.otros_nombres, ...(f.en_otros_paises || []).flatMap(p => [p.nombre, ...(p.otros || [])]),
+    ...f.universal.flatMap(u => [uni[u]?.nombre_es, uni[u]?.nombre_en]),
+  ].filter(Boolean).join(" "))]));
+
+  function img(i, alt) {
+    if (i && i.archivo) return `<img src="${esc(i.archivo)}" alt="${esc(alt)}" loading="lazy">`;
+    return `<div class="nofoto">Sin foto</div>`;
+  }
+  const precio = p => `<span class="price" aria-label="Precio ${p} de 5">${"$".repeat(p)}<span class="off">${"$".repeat(5 - p)}</span></span>`;
+  const sq = v => `<span class="sq" aria-hidden="true">${[1, 2, 3, 4, 5].map(i => `<i class="${i <= v ? "on" : ""}"></i>`).join("")}</span>`;
+
+  function pintar() {
+    const q = norm(estado.q.trim());
+    const pf = PRECIOS.find(p => p[0] === estado.precio)[2];
+    const lista = fichas.filter(f =>
+      (!q || indice[f.id].includes(q)) &&
+      (estado.cocina === "todos" || f.cocina.includes(estado.cocina)) &&
+      (estado.zona === "todas" || f.zonas.includes(estado.zona)) &&
+      pf(f.precio));
+    const orden = ORDENES.find(o => o[0] === estado.orden)[2];
+    lista.sort((a, b) => orden(a, b) || a.nombre.localeCompare(b.nombre, "es"));
+
+    cocinaEl.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === estado.cocina));
+    zonaEl.value = estado.zona; zonaEl.classList.toggle("activo", estado.zona !== "todas");
+    precioEl.value = estado.precio; precioEl.classList.toggle("activo", estado.precio !== "todos");
+    ordenEl.value = estado.orden;
+    const activos = [
+      estado.q.trim() && `«${esc(estado.q.trim())}»`,
+      estado.cocina !== "todos" && COCINA.find(c => c[0] === estado.cocina)[1].toLowerCase(),
+      estado.zona !== "todas" && `de ${esc(estado.zona.toLowerCase())}`,
+      estado.precio !== "todos" && PRECIOS.find(p => p[0] === estado.precio)[1].toLowerCase(),
+    ].filter(Boolean);
+    document.getElementById("explica").innerHTML = `<b>${lista.length}</b> de ${fichas.length} cortes` + (activos.length ? ` · ${activos.join(" · ")}` : "");
+    document.getElementById("limpiar").hidden = !activos.length;
+
+    const grid = document.getElementById("grid");
+    if (!lista.length) { grid.innerHTML = `<p class="vacio">Ningún corte cumple con todo eso. Prueba quitando un filtro.</p>`; return; }
+    grid.innerHTML = lista.map(f => `
+      <button class="card" type="button" data-id="${f.id}">
+        <div class="ph">${img((fotosDe[f.id] || []).find(i => i.tipo === "preparada"), f.nombre + " preparado")}</div>
+        <div class="cb">
+          <h3>${esc(f.nombre)}</h3>
+          <p class="aka">${esc(f.mx.slice(0, 3).map(corto).join(" · "))}</p>
+          <div class="barras">
+            <div><span>Suavidad</span>${sq(f.suavidad)}</div>
+            <div><span>Sabor</span>${sq(f.sabor)}</div>
+          </div>
+          <div class="cf">${precio(f.precio)}<span class="chip">${esc(f.tiempo)}</span></div>
+        </div>
+      </button>`).join("");
+  }
+  document.getElementById("grid").addEventListener("click", e => {
+    const c = e.target.closest(".card"); if (c) abrir(c.dataset.id);
+  });
+
+  // Ficha
+  const dlg = document.getElementById("ficha");
+  const cuerpo = document.getElementById("ficha-body");
+
+  function figura(f, i) {
+    const pie = `<b>${esc(TIPO_FOTO[i.tipo] || i.tipo)}</b>${i.muestra && !["cruda", "preparada"].includes(i.tipo) ? ` · ${esc(i.muestra)}` : ""}` +
+      (i.page_url ? ` · <a href="${esc(i.page_url)}" target="_blank" rel="noopener">${esc(host(i.page_url))}</a>` : "");
+    return `<figure class="foto"><div class="ph">${img(i, `${f.nombre}: ${i.muestra || i.tipo}`)}</div><figcaption>${pie}</figcaption></figure>`;
+  }
+  function galeria(f) {
+    const l = fotosDe[f.id] || [];
+    const principales = [l.find(i => i.tipo === "cruda"), l.find(i => i.tipo === "preparada")].filter(Boolean);
+    const resto = l.filter(i => !principales.includes(i));
+    return `<div class="galeria"><div class="fotos">${principales.map(i => figura(f, i)).join("")}</div>` +
+      (resto.length ? `<div class="fotos mas">${resto.map(i => figura(f, i)).join("")}</div>` : "") + `</div>`;
+  }
+  const rate = (n, v) => `<div class="rate"><span>${n}</span>${sq(v)}<b>${v}</b></div>`;
+  const host = u => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (e) { return u; } };
+
+  function costumbre(f) {
+    const c = f.costumbre; if (!c) return "";
+    const filas = [["Dónde", c.lugar], ["En qué partes", c.regiones], ["Cómo", c.como], ["Cuándo", c.cuando]].filter(x => x[1]);
+    if (!filas.length) return "";
+    return `<section class="panel"><h4>Cómo se come en México</h4><dl class="datos">${filas.map(([t, v]) => `<dt>${t}</dt><dd>${esc(v)}</dd>`).join("")}</dl></section>`;
+  }
+  function paises(f) {
+    const l = f.en_otros_paises; if (!l || !l.length) return "";
+    return `<section class="panel"><h4>Cómo le dicen en otros países</h4><ul class="paises">${l.map(p => `<li>
+      <div class="pn"><span class="pais">${esc(PAIS[p.pais] || p.pais)}</span>${p.nombre ? `<span class="nombre">${esc(p.nombre)}</span>` : ""}<span class="chip ${esc(p.relacion)}">${esc(REL_PAIS[p.relacion] || p.relacion)}</span></div>
+      ${p.otros && p.otros.length ? `<p class="nota">También: ${esc(p.otros.join(", "))}</p>` : ""}
+      ${p.nota ? `<p class="nota">${esc(p.nota)}</p>` : ""}</li>`).join("")}</ul></section>`;
+  }
+
+  // Lo que dice la gente: comentarios reales recopilados de varias redes, cada uno con su enlace al original.
+  const EN_RED = { Foro: "en el foro", Blog: "en el blog", "Reseña": "en la reseña" };
+  const NOMBRE_RED = { Foro: "foros", Blog: "blogs", "Reseña": "reseñas" };
+  const lista = xs => xs.length > 1 ? xs.slice(0, -1).join(", ") + " y " + xs[xs.length - 1] : xs.join("");
+  const VISIBLES = 6;
+  function gente(f) {
+    const l = f.comentarios || []; if (!l.length) return "";
+    const redes = [...new Set(l.map(c => NOMBRE_RED[c.plataforma] || c.plataforma))];
+    return `<section class="gente"><h4>Lo que dice la gente</h4>
+      <p class="gente-nota">Comentarios reales de ${esc(lista(redes))}, sin editar.</p>
+      <div class="feed">${l.map((c, i) => `<article class="post"${i >= VISIBLES ? " hidden" : ""}>
+        <p class="txt">“${esc(c.traduccion || c.texto)}”</p>
+        ${c.url ? `<a class="ver" href="${esc(c.url)}" target="_blank" rel="noopener" title="${esc(c.donde)}">Ver original ${esc(EN_RED[c.plataforma] || "en " + c.plataforma)}</a>` : ""}
+      </article>`).join("")}</div>
+      ${l.length > VISIBLES ? `<button class="mas-gente" type="button">Ver los ${l.length - VISIBLES} comentarios restantes</button>` : ""}
+    </section>`;
+  }
+
+  // Video: se muestra la miniatura (guardada junto a las fotos). Es un enlace normal a YouTube; si la página
+  // deja incrustar, al tocarla se carga el reproductor aquí mismo en vez de salir.
+  const ytUrl = id => `https://www.youtube.com/watch?v=${encodeURIComponent(id)}`;
+  function video(f) {
+    const v = (f.videos || []).find(x => x.ok !== false); if (!v) return "";
+    return `<section><h4>En video</h4>
+      <div class="video" data-yt="${esc(v.youtube_id)}">
+        <a class="yt" href="${ytUrl(v.youtube_id)}" target="_blank" rel="noopener" aria-label="Ver el video: ${esc(v.titulo)}">${v.miniatura ? `<img src="${esc(v.miniatura)}" alt="" loading="lazy">` : ""}<span class="play"></span></a>
+      </div>
+      <p class="video-pie"><b>${esc(v.titulo)}</b> · ${esc(v.canal)} · <a href="${ytUrl(v.youtube_id)}" target="_blank" rel="noopener">Ver en YouTube</a></p>
+    </section>`;
+  }
+  const ytEmbed = id => `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0`;
+  // claude.ai no deja incrustar reproductores de otros sitios en las páginas publicadas (ningún permiso lo activa).
+  // Al cargar se prueba en silencio; si está bloqueado, tocar la miniatura sigue el enlace y abre YouTube en otra pestaña.
+  // No sirve abrir una ventanita con window.open: hereda las restricciones de la página y YouTube responde
+  // "ERR_BLOCKED_BY_RESPONSE" (con /embed, "Error 153"). Un enlace normal sí abre.
+  let incrustarBloqueado = false;
+  function reproducir(caja, e) {
+    if (incrustarBloqueado) return;
+    e.preventDefault();
+    caja.innerHTML = `<iframe src="${ytEmbed(caja.dataset.yt)}" title="Video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+  }
+  function aviso(caja) {
+    caja.innerHTML = `<div class="aviso"><span>Aquí no se puede reproducir el video.</span>` +
+      `<a href="${ytUrl(caja.dataset.yt)}" target="_blank" rel="noopener">Verlo en YouTube</a></div>`;
+  }
+  // Si la página no deja cargar el reproductor, se ofrece abrir el video en YouTube.
+  document.addEventListener("securitypolicyviolation", e => {
+    if (!/youtube/.test(e.blockedURI || "")) return;
+    incrustarBloqueado = true;
+    cuerpo.querySelectorAll(".video").forEach(caja => { if (caja.querySelector("iframe")) aviso(caja); });
+  });
+  (function probarIncrustar() {
+    const f = document.createElement("iframe");
+    f.src = "https://www.youtube-nocookie.com/embed/";
+    f.title = "Prueba del reproductor";
+    f.hidden = true;
+    document.body.appendChild(f);
+    setTimeout(() => f.remove(), 5000);
+  })();
+
+  function abrir(id) {
+    const f = byId[id]; if (!f) return;
+    const hermanos = fichas.filter(x => x.id !== f.id && x.universal.some(u => f.universal.includes(u)));
+    const prueba = (f.si_te_gusta || []).filter(x => byId[x]);
+    const fuentes = [...new Set([...(f.fuentes || []), ...(f.costumbre?.fuentes || []), ...(f.fuentes_paises || [])])];
+    const cultura = [costumbre(f), paises(f)].filter(Boolean);
+    cuerpo.innerHTML = `<div class="ficha">
+      ${galeria(f)}
+      <div class="cabeza">
+        <span class="lbl num">${f.id} · confianza <span class="chip ${esc(f.confianza)}">${esc(f.confianza)}</span></span>
+        <h2 id="ficha-nombre">${esc(f.nombre)}</h2>
+        ${f.mx.length ? `<p class="aka">En México también: ${esc(f.mx.join(" · "))}</p>` : ""}
+        <div class="etiquetas">${precio(f.precio)}<span class="chip">${esc(f.tiempo)}</span></div>
+      </div>
+      ${hermanos.length ? `<div class="hermanos"><span class="lbl">Mismo músculo en México</span><div class="links">${hermanos.map(x => `<button type="button" data-id="${x.id}">${esc(x.nombre)}</button>`).join("")}</div></div>` : ""}
+      <p class="desc">${esc(f.descripcion)}</p>
+      ${cultura.length === 2 ? `<div class="cols">${cultura.map(c => `<div>${c}</div>`).join("")}</div>` : cultura.join("")}
+      <section><h4>Dónde está en la res</h4><figure class="mapa mapa-ficha"><div class="lienzo">${mapa.replaceAll("silueta", "f-silueta")}</div><figcaption></figcaption></figure></section>
+      <div class="cols">
+        <div>
+          <section><h4>Calificación</h4><div class="rates">${rate("Suavidad", f.suavidad)}${rate("Sabor", f.sabor)}</div>
+            <p class="nota-escala">Del 1 al 5, preparado como se acostumbra en México.</p></section>
+          ${f.tip ? `<div class="nota-box"><span class="cap">Tip</span><p>${esc(f.tip)}</p></div>` : ""}
+          ${f.ojo ? `<div class="nota-box ojo"><span class="cap">Ojo</span><p>${esc(f.ojo)}</p></div>` : ""}
+          ${prueba.length ? `<section><h4>Si te gusta, prueba</h4><div class="links">${prueba.map(x => `<button type="button" data-id="${x}">${esc(byId[x].nombre)}</button>`).join("")}</div></section>` : ""}
+        </div>
+        <div>
+          ${f.falsos ? `<section><h4>Se confunde con</h4><p class="texto">${esc(f.falsos)}</p></section>` : ""}
+          ${f.variantes ? `<section><h4>Variantes regionales</h4><p class="texto">${esc(f.variantes)}</p></section>` : ""}
+          <section><h4>Qué músculo es</h4>
+            <p class="texto" style="margin-bottom:8px">Relación con el catálogo universal: <b>${esc(REL[f.relacion] || f.relacion)}</b></p>
+            <ul class="unis">${f.universal.map(u => uni[u] ? `<li><b class="num">${u}</b> ${esc(uni[u].nombre_es)} <span class="muted">· ${esc(uni[u].nombre_en)} · <i>${esc(uni[u].musculo)}</i></span></li>` : `<li>${u}</li>`).join("")}</ul>
+          </section>
+        </div>
+      </div>
+      ${video(f)}
+      ${gente(f)}
+      ${fuentes.length ? `<section><h4>Fuentes</h4><ol class="fuentes">${fuentes.map(u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(host(u))}</a></li>`).join("")}</ol></section>` : ""}
+    </div>`;
+    const fig = cuerpo.querySelector(".mapa-ficha");
+    resaltar(f, fig);
+    abrirCapa(dlg, "#" + f.id);
+    adaptar(fig);
+    dlg.scrollTop = 0;
+  }
+  // Al pasar el mouse por una zona del mapa se ve qué músculo es.
+  const SVGNS = "http://www.w3.org/2000/svg";
+  function titular(svg) {
+    svg.querySelectorAll("[data-u]").forEach(el => {
+      const t = el.dataset.u.split(" ").filter(u => uni[u]).map(u => `${u} · ${uni[u].nombre_es}`).join(" / ");
+      if (!t) return;
+      const ti = document.createElementNS(SVGNS, "title");
+      ti.textContent = (el.dataset.pieza ? el.dataset.pieza.replace(" ", " / ") + ": " : "") + t;
+      el.appendChild(ti);
+    });
+  }
+
+  // Ficha: el mismo mapa con nombres y el corte en color. Si todo el corte va por dentro (filete, lengua…), se muestra la vista "por dentro".
+  function resaltar(f, fig) {
+    const svg = fig.querySelector("svg");
+    const zonas = rotular(svg);
+    const set = new Set(conComponentes(f));
+    const on = [...svg.querySelectorAll("[data-u]")].filter(el => el.dataset.u.split(" ").some(u => set.has(u)));
+    on.forEach(el => el.classList.add("on"));
+    zonas.forEach(z => z.lbl && z.lbl.classList.toggle("on", z.el.classList.contains("on")));
+    const dentro = on.length > 0 && on.every(el => el.classList.contains("int"));
+    const mixto = !dentro && on.some(el => el.classList.contains("int"));
+    fig.classList.toggle("dentro", dentro);
+    const nombres = f.universal.map(u => uni[u] ? esc(uni[u].nombre_es) : u).join(" + ");
+    fig.querySelector("figcaption").innerHTML =
+      `En color: <b>${nombres}</b>.` + (f.zonas.length ? ` Zona de la res: <b>${esc(f.zonas.join(" y "))}</b>.` : "") +
+      (dentro ? " Va por dentro: no se ve desde afuera." : mixto ? " Lo punteado va por dentro." : "") + " Dibujo esquemático.";
+  }
+
+  cuerpo.addEventListener("click", e => {
+    const b = e.target.closest(".links button"); if (b) return abrir(b.dataset.id);
+    const yt = e.target.closest(".yt"); if (yt) return reproducir(yt.closest(".video"), e);
+    const mas = e.target.closest(".mas-gente");
+    if (mas) { mas.closest(".gente").querySelectorAll(".post[hidden]").forEach(p => { p.hidden = false; }); mas.hidden = true; }
+  });
+  document.getElementById("cerrar").addEventListener("click", () => cerrarCapa(dlg));
+  dlg.addEventListener("click", e => { if (e.target === dlg) cerrarCapa(dlg); });
+
+  // Botón "atrás" (sobre todo en celular): cada ventana que se abre (ficha o juego) agrega un paso al historial
+  // y "atrás" cierra la de arriba. Si se cierra con su botón, con Escape o tocando afuera, se quita ese paso.
+  // Si el navegador no dejó agregar el paso, nunca se llama a "atrás" (sacaría a la persona de la página).
+  const capas = [];
+  let ignorarAtras = false;
+  function paso(hash, reemplazar) {
+    const metodo = reemplazar ? "replaceState" : "pushState";
+    try { history[metodo]({ capa: true }, "", hash); return true; }
+    catch (e) { try { history[metodo]({ capa: true }, ""); return true; } catch (e2) { return false; } }
+  }
+  function abrirCapa(d, hash) {
+    if (d.open) { paso(hash, true); return; }
+    d.showModal();
+    capas.push({ d, conPaso: paso(hash) });
+  }
+  function cerrarCapa(d) {
+    if (!d.open) return;
+    d.close();
+    const i = capas.findIndex(c => c.d === d);
+    if (i < 0) return;
+    const [c] = capas.splice(i, 1);
+    if (c.conPaso) { ignorarAtras = true; history.back(); }
+  }
+  window.addEventListener("popstate", () => {
+    if (ignorarAtras) { ignorarAtras = false; return; }
+    const c = capas.pop();
+    if (c && c.d.open) c.d.close();
+  });
+  [dlg, document.getElementById("juego")].forEach(d => d.addEventListener("cancel", e => { e.preventDefault(); cerrarCapa(d); }));
+
+  // Nombres en la res: cada zona lleva el nombre de su corte principal.
+  // Corte principal = la relación más directa con el músculo de la zona (igual > aproximado > … > formato),
+  // y entre empates, el que viene de menos músculos. Vía un universal compuesto (T-bone, tomahawk) cuenta un poco menos.
+  const PRI = { igual: 0, aproximado: 1, parte_de: 2, combinacion: 3, formato: 4 };
+  const cortesPorU = {};
+  fichas.forEach(f => f.universal.forEach(u => {
+    const r = (PRI[f.relacion] ?? 5) * 10 + f.universal.length;
+    (cortesPorU[u] ||= []).push({ f, r });
+    (uni[u]?.componentes || []).forEach(c => (cortesPorU[c] ||= []).push({ f, r: r + 5 }));
+  }));
+  function cortesDeZona(el) {
+    const mejor = new Map();
+    // El primer U-ID de la zona es su músculo propio; los demás (p. ej. tuétano en el chambarete) cuentan después.
+    el.dataset.u.split(" ").filter(Boolean).forEach((u, i) => (cortesPorU[u] || []).forEach(({ f, r }) => {
+      const rr = r + (i ? 100 : 0);
+      if (!mejor.has(f.id) || rr < mejor.get(f.id)) mejor.set(f.id, rr);
+    }));
+    return [...mejor].sort((a, b) => a[1] - b[1] || byId[a[0]].nombre.localeCompare(byId[b[0]].nombre, "es")).map(([id]) => byId[id]);
+  }
+  function area(el) {
+    if (el.tagName === "ellipse") return Math.PI * el.getAttribute("rx") * el.getAttribute("ry");
+    const p = (el.getAttribute("points") || "").trim().split(/\s+/).filter(Boolean).map(s => s.split(",").map(Number));
+    let a = 0;
+    p.forEach(([x, y], i) => { const [x2, y2] = p[(i + 1) % p.length]; a += x * y2 - x2 * y; });
+    return Math.abs(a / 2);
+  }
+  const etiqueta = n => n.replace(/\s*\([^)]*\)/g, "").replace(/ de res$/, "").trim();
+
+  // Pone el nombre del corte principal en cada zona. Por fuera, un corte se rotula una sola vez: en su zona más grande
+  // (o en todas las que son el mismo músculo, como los dos chambaretes). Por dentro se rotula cada pieza (la arrachera son dos).
+  function rotular(svg) {
+    const capa = document.createElementNS(SVGNS, "g");
+    capa.setAttribute("class", "lbls");
+    svg.appendChild(capa);
+    const zonas = [...svg.querySelectorAll("[data-u]")].filter(el => el.dataset.u.trim())
+      .map(el => ({ el, cortes: cortesDeZona(el), area: area(el) }));
+    const grupos = {};
+    zonas.forEach(z => { if (z.cortes.length) (grupos[z.cortes[0].id] ||= []).push(z); });
+    Object.values(grupos).forEach(g => {
+      const mayor = g.reduce((a, b) => (b.area > a.area ? b : a));
+      g.forEach(z => { z.rotular = z.el.classList.contains("int") || z.el.dataset.u === mayor.el.dataset.u; });
+    });
+    svg.querySelectorAll('[data-u=""]').forEach(el => el.classList.add("vacia"));
+    zonas.forEach(z => {
+      if (!z.cortes.length) { z.el.classList.add("vacia"); return; }
+      if (!z.rotular || !z.el.dataset.x) return;
+      const { x, y } = z.el.dataset;
+      const t = document.createElementNS(SVGNS, "text");
+      t.setAttribute("class", "lbz " + (z.el.classList.contains("int") ? "int-l" : "ext-l"));
+      t.setAttribute("x", x);
+      t.setAttribute("y", y);
+      if (z.el.dataset.rot) t.setAttribute("transform", `rotate(${z.el.dataset.rot} ${x} ${y})`);
+      const nombre = etiqueta(z.cortes[0].nombre);
+      const lineas = z.el.dataset.wrap ? nombre.split(" ") : [nombre];
+      lineas.forEach((l, i) => {
+        const s = document.createElementNS(SVGNS, "tspan");
+        s.setAttribute("x", x);
+        s.setAttribute("dy", i ? "1.1em" : lineas.length > 1 ? "-0.2em" : "0.35em");
+        s.textContent = l;
+        t.appendChild(s);
+      });
+      capa.appendChild(t);
+      z.lbl = t;
+    });
+    svg.querySelectorAll(".pz text").forEach(t => { t.textContent = t.textContent.toUpperCase(); });
+    titular(svg);
+    return zonas;
+  }
+
+  // Diseño responsivo del mapa: si el dibujo mide menos de ANCHO_COMPACTO, los nombres no se leerían
+  // y el mapa pasa a modo compacto (ver CSS). Se revisa cada vez que cambia el tamaño.
+  const ANCHO_COMPACTO = 660;
+  let figFicha = null;
+  const observador = new ResizeObserver(entradas => entradas.forEach(e => {
+    const compacto = e.contentRect.width > 0 && e.contentRect.width < ANCHO_COMPACTO;
+    if (e.target.classList.contains("compacto") === compacto) return;
+    e.target.classList.toggle("compacto", compacto);
+    if (e.target === grande) cambioCompacto(compacto);
+  }));
+  function adaptar(fig) {
+    if (figFicha) observador.unobserve(figFicha);
+    figFicha = fig;
+    fig.classList.toggle("compacto", fig.clientWidth < ANCHO_COMPACTO);
+    observador.observe(fig);
+  }
+
+  // Explora la res: el mapa grande; tocar una zona abre su ficha (en compacto, primero la muestra).
+  const grande = document.getElementById("mapa-grande");
+  grande.innerHTML = mapa.replaceAll("silueta", "g-silueta");
+  const svgG = grande.querySelector("svg");
+  const cortesZona = new Map();
+  const lblDe = new Map();
+  rotular(svgG).forEach(({ el, cortes, lbl }) => {
+    if (lbl) lblDe.set(el, lbl);
+    if (!cortes.length) return;
+    cortesZona.set(el, cortes);
+    el.classList.add("clic");
+    el.setAttribute("tabindex", el.classList.contains("int") ? "-1" : "0");
+    el.setAttribute("role", "button");
+    el.setAttribute("aria-label", cortes.map(f => f.nombre).join(", "));
+  });
+
+  const elige = document.getElementById("elige");
+  const exploraIn = document.getElementById("explora-in");
+  function elegir(el, px, py) {
+    const cortes = cortesZona.get(el);
+    if (cortes.length === 1) { elige.hidden = true; abrir(cortes[0].id); return; }
+    elige.innerHTML = `<span class="lbl">De esta parte salen</span><div class="links">${cortes.map(f =>
+      `<button type="button" data-id="${f.id}">${esc(f.nombre)}</button>`).join("")}</div>`;
+    elige.hidden = false;
+    const caja = exploraIn.getBoundingClientRect();
+    elige.style.left = Math.max(8, Math.min(px - caja.left - elige.offsetWidth / 2, caja.width - elige.offsetWidth - 8)) + "px";
+    elige.style.top = (py - caja.top + 14) + "px";
+    elige.querySelector("button").focus();
+  }
+  // Modo compacto: tocar una parte (o una zona de abajo) la pinta, muestra su nombre y lista sus cortes.
+  const panel = document.getElementById("zona-panel");
+  const chipsZonas = document.getElementById("zonas-chips");
+  const esCompacto = () => grande.classList.contains("compacto");
+  function limpiarSeleccion() {
+    svgG.querySelectorAll(".on").forEach(x => x.classList.remove("on"));
+    chipsZonas.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", "false"));
+    panel.hidden = true;
+  }
+  function mostrarPanel(titulo, cortes) {
+    panel.innerHTML = `<div><span class="lbl">De aquí salen</span><div class="titulo">${esc(titulo)}</div></div>` +
+      `<div class="links">${cortes.map(f => `<button type="button" data-id="${f.id}">${esc(f.nombre)}</button>`).join("")}</div>`;
+    panel.hidden = false;
+  }
+  function pintarParte(el) { el.classList.add("on"); lblDe.get(el)?.classList.add("on"); }
+  function seleccionarParte(el) {
+    limpiarSeleccion();
+    pintarParte(el);
+    mostrarPanel((el.dataset.pieza || "Esta parte").split(" ").join(" y "), cortesZona.get(el));
+  }
+  function seleccionarZona(z, boton) {
+    limpiarSeleccion();
+    const dentro = grande.classList.contains("dentro");
+    // Se pinta la zona completa, también sus partes sin corte propio (más claras).
+    svgG.querySelectorAll(`[data-pieza~="${z}"]`).forEach(el => {
+      if (el.classList.contains("int") === dentro && (cortesZona.has(el) || !dentro)) pintarParte(el);
+    });
+    boton.setAttribute("aria-pressed", "true");
+    mostrarPanel(z, fichas.filter(f => f.zonas.includes(z)).sort((a, b) => a.nombre.localeCompare(b.nombre, "es")));
+  }
+  chipsZonas.innerHTML = ZONAS.filter(z => fichas.some(f => f.zonas.includes(z)))
+    .map(z => `<button type="button" data-z="${esc(z)}" aria-pressed="false">${esc(z)}</button>`).join("");
+  chipsZonas.addEventListener("click", e => { const b = e.target.closest("button"); if (b) seleccionarZona(b.dataset.z, b); });
+  panel.addEventListener("click", e => { const b = e.target.closest("button[data-id]"); if (b) abrir(b.dataset.id); });
+  function cambioCompacto(compacto) {
+    exploraIn.classList.toggle("compacto", compacto);
+    limpiarSeleccion();
+    elige.hidden = true;
+    notaCapa.textContent = nota();
+  }
+
+  svgG.addEventListener("click", e => {
+    const el = e.target.closest(".clic");
+    if (!el) { elige.hidden = true; return; }
+    e.stopPropagation();
+    if (esCompacto()) seleccionarParte(el); else elegir(el, e.clientX, e.clientY);
+  });
+  svgG.addEventListener("keydown", e => {
+    const el = e.target.closest(".clic");
+    if (!el || (e.key !== "Enter" && e.key !== " ")) return;
+    e.preventDefault();
+    const r = el.getBoundingClientRect();
+    if (esCompacto()) seleccionarParte(el); else elegir(el, r.left + r.width / 2, r.top + r.height / 2);
+  });
+  elige.addEventListener("click", e => {
+    const b = e.target.closest("button");
+    if (b) { elige.hidden = true; abrir(b.dataset.id); }
+  });
+  document.addEventListener("click", e => { if (!elige.hidden && !elige.contains(e.target)) elige.hidden = true; });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") elige.hidden = true; });
+
+  const NOTAS = {
+    fuera: "Toca una parte para ver su ficha. Adentro va el corte; afuera, en mayúsculas, la zona de la res de la que sale. Las partes más claras no tienen un corte propio en México.",
+    dentro: "Piezas que no se ven desde afuera, como el filete, la arrachera o la lengua. Toca una para ver su ficha.",
+    compacto: "Toca una parte de la res, o una de las zonas de abajo, para ver qué cortes salen de ahí. Las partes más claras no tienen un corte propio en México.",
+  };
+  const notaCapa = document.getElementById("capa-nota");
+  const nota = () => esCompacto() ? NOTAS.compacto : NOTAS[grande.classList.contains("dentro") ? "dentro" : "fuera"];
+  notaCapa.textContent = nota();
+  document.getElementById("capa").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    const dentro = b.dataset.v === "dentro";
+    grande.classList.toggle("dentro", dentro);
+    document.querySelectorAll("#capa button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    notaCapa.textContent = nota();
+    cortesZona.forEach((_, el) => el.setAttribute("tabindex", el.classList.contains("int") === dentro ? "0" : "-1"));
+    elige.hidden = true;
+    limpiarSeleccion();
+  });
+
+  grande.classList.toggle("compacto", grande.clientWidth < ANCHO_COMPACTO);
+  cambioCompacto(esCompacto());
+  observador.observe(grande);
+
+  // ── Juego "¿Dónde está?" (idea de Seterra) ──
+  // Aparece un nombre y hay que tocarlo en la res. Acierto: se pinta según cuántos errores costó y sigue la siguiente.
+  // Error: se dice qué se tocó. Al tercer error se marca la respuesta. Al final: % a la primera, tiempo y mejor marca.
+  const juegoDlg = document.getElementById("juego");
+  const juegoMapa = document.getElementById("juego-mapa");
+  const JUEGOS = [
+    { id: "zonas", nombre: "Zonas de la res", vista: "fuera" },
+    { id: "cortes", nombre: "Cortes por fuera", vista: "fuera" },
+    { id: "dentro", nombre: "Cortes por dentro", vista: "dentro" },
+  ];
+  let partes = [], hitDe = new Map(), J = null, reloj = null;
+  const barajar = l => { const a = [...l]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const mmss = ms => { const t = Math.floor(ms / 1000); return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, "0")}`; };
+
+  function montarJuego() {
+    juegoMapa.innerHTML = mapa.replaceAll("silueta", "j-silueta");
+    const svg = juegoMapa.querySelector("svg");
+    // La cabeza completa cuenta como "Cabeza", no solo el cachete.
+    const cabeza = document.createElementNS(SVGNS, "polygon");
+    cabeza.setAttribute("class", "hit");
+    cabeza.setAttribute("points", "40,100 185,100 185,330 40,330");
+    cabeza.dataset.pieza = "Cabeza";
+    const clip = svg.querySelector("g[clip-path]");
+    clip.insertBefore(cabeza, clip.firstChild);
+    partes = [...svg.querySelectorAll(".z, .int, .hit")].map(el => ({
+      el, int: el.classList.contains("int"),
+      pieza: (el.dataset.pieza || "").split(" ").filter(Boolean),
+      corte: (el.dataset.u || "").trim() ? cortesDeZona(el)[0] : null,
+    }));
+    // Lo chiquito (cola, molleja, lengua…) recibe un área de toque más grande, invisible.
+    partes.forEach(p => {
+      if (p.el === cabeza || (area(p.el) > 2600 && !p.el.classList.contains("cola"))) return;
+      const c = p.el.cloneNode(false);
+      c.setAttribute("class", "hit" + (p.int ? " int-hit" : ""));
+      c.setAttribute("stroke-width", "26");
+      p.el.after(c);
+      hitDe.set(c, p);
+    });
+    partes.forEach(p => hitDe.set(p.el, p));
+    svg.addEventListener("click", e => { const el = e.target.closest(".z, .int, .hit"); if (el && hitDe.has(el)) tocar(hitDe.get(el)); });
+    adaptarJuego();
+  }
+  function adaptarJuego() {
+    juegoMapa.classList.toggle("compacto", juegoMapa.clientWidth > 0 && juegoMapa.clientWidth < ANCHO_COMPACTO);
+  }
+  function preguntasDe(id) {
+    if (id === "zonas") return ZONAS.filter(z => partes.some(p => !p.int && p.pieza.includes(z))).map(z => ({ nombre: z, zona: z }));
+    const dentro = id === "dentro";
+    const vistos = new Map();
+    partes.forEach(p => { if (p.int === dentro && p.corte) vistos.set(p.corte.id, p.corte); });
+    return [...vistos.values()].map(f => ({ nombre: f.nombre, ficha: f }));
+  }
+  const objetivosDe = q => partes.filter(p => q.zona ? (!p.int && p.pieza.includes(q.zona)) : (p.corte === q.ficha && p.int === (J.modo.vista === "dentro")));
+  function nombreDe(p) {
+    if (J.modo.id === "zonas") return p.pieza.length ? `la zona ${p.pieza.join(" / ")}` : "otra parte";
+    return p.corte ? p.corte.nombre : `una parte sin corte propio (${p.pieza.join(" / ") || "res"})`;
+  }
+
+  function empezar(id) {
+    if (!partes.length) montarJuego();
+    const modo = JUEGOS.find(m => m.id === id);
+    partes.forEach(p => p.el.classList.remove("j0", "j1", "j2", "j3", "pista", "mal"));
+    juegoMapa.querySelectorAll(".fugaz").forEach(t => t.remove());
+    juegoMapa.classList.toggle("dentro", modo.vista === "dentro");
+    J = { modo, pendientes: [], historial: [], errores: 0, fin: false, inicio: performance.now() };
+    J.pendientes = barajar(preguntasDe(id));
+    J.total = J.pendientes.length;
+    document.getElementById("juego-total").textContent = J.total;
+    document.getElementById("juego-resultado").hidden = true;
+    document.querySelectorAll("#juego-modos button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === id));
+    clearInterval(reloj);
+    reloj = setInterval(() => { document.getElementById("juego-reloj").textContent = mmss(performance.now() - J.inicio); }, 250);
+    decir("");
+    siguiente();
+  }
+  function siguiente() {
+    document.getElementById("juego-van").textContent = J.historial.length;
+    if (!J.pendientes.length) return terminar();
+    J.actual = J.pendientes.shift();
+    J.errores = 0;
+    J.objetivos = objetivosDe(J.actual);
+    // Una pregunta sin dónde tocarla no se puede contestar: se salta.
+    if (!J.objetivos.length) { J.total--; document.getElementById("juego-total").textContent = J.total; return siguiente(); }
+    document.getElementById("juego-pregunta").innerHTML = `Toca: <b>${esc(J.actual.nombre)}</b>`;
+  }
+  function tocar(p) {
+    if (!J || J.fin) return;
+    if (J.objetivos.includes(p)) {
+      const nivel = Math.min(J.errores, 3);
+      J.objetivos.forEach(t => { t.el.classList.remove("pista"); t.el.classList.add("j" + nivel); });
+      J.historial.push({ q: J.actual, errores: J.errores });
+      decir(J.errores ? "" : "¡Bien!");
+      return siguiente();
+    }
+    J.errores++;
+    p.el.classList.add("mal");
+    setTimeout(() => p.el.classList.remove("mal"), 500);
+    fugaz(p);
+    if (J.errores >= 3) J.objetivos.forEach(t => t.el.classList.add("pista"));
+    decir(`Eso es ${nombreDe(p)}. ${J.errores >= 3 ? "Te marco la respuesta." : "Intenta otra vez."}`, true);
+  }
+  // El nombre de lo que se tocó aparece un momento sobre el dibujo, para aprender.
+  function fugaz(p) {
+    juegoMapa.querySelectorAll(".fugaz").forEach(t => t.remove());
+    const b = p.el.getBBox();
+    const t = document.createElementNS(SVGNS, "text");
+    t.setAttribute("class", "fugaz");
+    t.setAttribute("x", p.el.dataset.x || b.x + b.width / 2);
+    t.setAttribute("y", p.el.dataset.y || b.y + b.height / 2);
+    t.textContent = J.modo.id === "zonas" ? (p.pieza.join(" / ") || "—") : (p.corte ? p.corte.nombre.replace(/\s*\([^)]*\)/g, "") : "Sin corte");
+    juegoMapa.querySelector("svg").appendChild(t);
+    setTimeout(() => t.remove(), 1400);
+  }
+  function decir(texto, mal) {
+    const d = document.getElementById("juego-dice");
+    d.textContent = texto;
+    d.classList.toggle("mal", !!mal);
+  }
+  function leerMarca(id) { try { return JSON.parse(localStorage.getItem("cortes-res-juego-" + id) || "null"); } catch (e) { return null; } }
+  function guardarMarca(id, m) { try { localStorage.setItem("cortes-res-juego-" + id, JSON.stringify(m)); } catch (e) {} }
+  function terminar() {
+    J.fin = true;
+    clearInterval(reloj);
+    const ms = performance.now() - J.inicio;
+    document.getElementById("juego-reloj").textContent = mmss(ms);
+    const primera = J.historial.filter(h => h.errores === 0).length;
+    const pct = Math.round(100 * primera / J.total);
+    const antes = leerMarca(J.modo.id);
+    const nueva = !antes || pct > antes.pct || (pct === antes.pct && ms < antes.ms);
+    if (nueva) guardarMarca(J.modo.id, { pct, ms });
+    const repasar = J.historial.filter(h => h.errores > 0);
+    document.getElementById("juego-pregunta").innerHTML = `¡Terminaste!`;
+    decir("");
+    const r = document.getElementById("juego-resultado");
+    r.innerHTML = `<div class="grande">${pct}% a la primera</div>
+      <div>${primera} de ${J.total} sin errores · ${mmss(ms)}</div>
+      <div class="marca">${nueva ? "¡Nueva mejor marca!" : `Tu mejor marca: ${antes.pct}% en ${mmss(antes.ms)}`}</div>
+      ${repasar.length ? `<div><span class="lbl">Para repasar</span><div class="links">${repasar.map(h => h.q.ficha
+        ? `<button type="button" data-id="${h.q.ficha.id}">${esc(h.q.nombre)}</button>`
+        : `<button type="button" data-zona="${esc(h.q.zona)}">${esc(h.q.nombre)}</button>`).join("")}</div></div>` : `<div>Sin errores. ¡Te la sabes!</div>`}
+      <div class="acciones"><button class="principal" type="button" data-otra="${J.modo.id}">Jugar de nuevo</button>
+        ${JUEGOS.filter(m => m.id !== J.modo.id).map(m => `<button class="reiniciar" type="button" data-otra="${m.id}">${esc(m.nombre)}</button>`).join("")}</div>`;
+    r.hidden = false;
+    r.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+
+  document.getElementById("juego-modos").innerHTML = JUEGOS.map(m => `<button type="button" data-v="${m.id}" aria-pressed="false">${esc(m.nombre)}</button>`).join("");
+  document.getElementById("juego-modos").addEventListener("click", e => { const b = e.target.closest("button"); if (b) empezar(b.dataset.v); });
+  document.getElementById("juego-reiniciar").addEventListener("click", () => empezar(J ? J.modo.id : "zonas"));
+  document.getElementById("juego-resultado").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    if (b.dataset.otra) return empezar(b.dataset.otra);
+    if (b.dataset.id) return abrir(b.dataset.id);
+    // Una zona para repasar lleva al catálogo filtrado por esa zona.
+    if (b.dataset.zona) { cerrarCapa(juegoDlg); estado.zona = b.dataset.zona; pintar(); document.getElementById("grid").scrollIntoView({ behavior: "smooth" }); }
+  });
+  function abrirJuego() {
+    abrirCapa(juegoDlg, "#jugar");
+    if (!partes.length) montarJuego();
+    adaptarJuego();
+    empezar(J ? J.modo.id : "zonas");
+  }
+  document.getElementById("abrir-juego").addEventListener("click", abrirJuego);
+  document.getElementById("cerrar-juego").addEventListener("click", () => cerrarCapa(juegoDlg));
+  juegoDlg.addEventListener("close", () => clearInterval(reloj));
+  new ResizeObserver(adaptarJuego).observe(juegoMapa);
+
+  pintar();
+  // Un link directo a una ficha (#MX17) o al juego (#jugar) la abre encima de la página; "atrás" regresa a la página.
+  const h = location.hash.slice(1);
+  if (byId[h] || h === "jugar") paso(location.pathname + location.search, true);
+  if (byId[h]) abrir(h);
+  else if (h === "jugar") abrirJuego();
+})();
+</script>
+
+</body></html>
