@@ -117,7 +117,7 @@ dialog::backdrop { background: rgb(10 14 12 / .6); }
 .foto figcaption { font-size: 13px; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .foto figcaption b { color: var(--ink); }
 .cabeza { display: grid; gap: 6px; }
-.cabeza h2 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 5vw, 44px); line-height: 1.05; margin: 0; text-wrap: balance; }
+.cabeza h2 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 5vw, 44px); line-height: 1.05; margin: 0; text-wrap: balance; padding-right: 84px; }
 .cabeza .aka { font-size: 14.5px; min-height: 0; }
 .desc { font-size: 17px; line-height: 1.55; margin: 0; max-width: 68ch; }
 .cols { display: grid; grid-template-columns: 1.1fr 1fr; gap: 28px; }
@@ -656,12 +656,12 @@ if (POSTHOG_CLAVE) {
     const fuentes = [...new Set([...(f.fuentes || []), ...(f.platillos || []).flatMap(p => p.fuentes || []), ...(f.costumbre?.fuentes || []), ...(f.fuentes_paises || [])])];
     const cultura = [costumbre(f), paises(f)].filter(Boolean);
     cuerpo.innerHTML = `<div class="ficha">
-      ${galeria(f)}
       <div class="cabeza">
         <h2 id="ficha-nombre">${esc(f.nombre)}</h2>
         ${f.mx.length ? `<p class="aka">En México también: ${esc(f.mx.join(" · "))}</p>` : ""}
         <div class="etiquetas">${precio(f.precio)}<span class="chip">${esc(f.tiempo)}</span></div>
       </div>
+      ${galeria(f)}
       ${hermanos.length ? `<div class="hermanos"><span class="lbl">${f.universal.length > 1 ? "De los mismos músculos" : "Del mismo músculo"} también ${hermanos.length > 1 ? "salen" : "sale"}</span><div class="links">${hermanos.map(x => `<button type="button" data-id="${x.id}">${esc(x.nombre)}</button>`).join("")}</div></div>` : ""}
       <p class="desc">${esc(f.descripcion)}</p>
       ${cultura.length === 2 ? `<div class="cols">${cultura.map(c => `<div>${c}</div>`).join("")}</div>` : cultura.join("")}
