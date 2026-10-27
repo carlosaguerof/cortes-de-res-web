@@ -879,10 +879,11 @@ if (POSTHOG_CLAVE) {
 
   const elige = document.getElementById("elige");
   const exploraIn = document.getElementById("explora-in");
+  // Tocar una zona siempre muestra qué sale de ahí, aunque sea un solo corte: así todas se comportan igual y se puede
+  // anticipar qué va a pasar (lo notó el founder: el ojo y el cachete preguntaban y la trompa abría directo).
   function elegir(el, px, py) {
     const cortes = cortesZona.get(el);
-    if (cortes.length === 1) { elige.hidden = true; abrir(cortes[0].id, "mapa"); return; }
-    elige.innerHTML = `<span class="lbl">De esta parte salen</span><div class="links">${cortes.map(f =>
+    elige.innerHTML = `<span class="lbl">De esta parte ${cortes.length > 1 ? "salen" : "sale"}</span><div class="links">${cortes.map(f =>
       `<button type="button" data-id="${f.id}">${esc(f.nombre)}</button>`).join("")}</div>`;
     elige.hidden = false;
     const caja = exploraIn.getBoundingClientRect();
