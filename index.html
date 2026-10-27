@@ -111,6 +111,9 @@ dialog::backdrop { background: rgb(10 14 12 / .6); }
 .fotos.mas { grid-template-columns: repeat(auto-fill, minmax(min(100%, 180px), 1fr)); }
 .foto { margin: 0; display: grid; gap: 6px; align-content: start; min-width: 0; }
 .foto .ph { border-radius: 3px; }
+/* Una foto más alta que el marco no se recorta: se ve completa sobre una copia borrosa de sí misma. */
+.foto .ph.alta::before { content: ""; position: absolute; inset: -24px; background: var(--fondo) center / cover; filter: blur(20px) brightness(.85); }
+.foto .ph.alta img { position: relative; object-fit: contain; }
 .foto figcaption { font-size: 13px; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .foto figcaption b { color: var(--ink); }
 .cabeza { display: grid; gap: 6px; }
@@ -145,8 +148,6 @@ h4 { margin: 0 0 8px; font-stretch: 75%; font-weight: 800; text-transform: upper
 .nota-box .cap { color: var(--tile); }
 .nota-box.ojo .cap { color: var(--warn); }
 .texto { font-size: 14px; margin: 0; color: var(--ink); }
-.unis { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 14px; }
-.unis .muted { color: var(--muted); }
 .links { display: flex; flex-wrap: wrap; gap: 6px; }
 .links button { border: 1.5px solid var(--line); background: var(--surface); border-radius: 999px; padding: 4px 12px; cursor: pointer; font-weight: 650; font-size: 13.5px; }
 .links button:hover { border-color: var(--accent); color: var(--accent); }
@@ -186,6 +187,15 @@ h4 { margin: 0 0 8px; font-stretch: 75%; font-weight: 800; text-transform: upper
 .marcador b { color: var(--ink); }
 .reiniciar { border: 1.5px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 14px; font-weight: 650; cursor: pointer; }
 .dice { min-height: 1.5em; margin: 0; font-size: 15px; color: var(--muted); }
+/* Al abrir el juego no hay uno elegido: los tres en grande, cada uno con la lista de lo que pregunta. */
+.elegir, .jugando { display: grid; gap: 14px; }
+.elegir[hidden], .jugando[hidden] { display: none; }
+.opciones { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+.opcion { display: grid; align-content: start; gap: 8px; text-align: left; font: inherit; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; padding: 18px 18px 20px; cursor: pointer; }
+.opcion:hover, .opcion:focus-visible { border-color: var(--accent); }
+.opcion b { font-family: var(--display); font-weight: 400; font-size: clamp(24px, 5vw, 30px); line-height: 1.05; color: var(--accent); }
+.opcion span { font-size: 14.5px; line-height: 1.45; color: var(--muted); }
+.modo-actual { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: 15px; }
 .dice.mal { color: var(--accent); }
 .juego-mapa svg { max-width: 900px; margin: 0 auto; }
 .juego-mapa .pz { display: none; }
@@ -351,7 +361,12 @@ if (POSTHOG_CLAVE) {
       <h2 id="juego-t">¿Dónde está?</h2>
       <p class="hint">Aparece un nombre: tócalo en la res. Si fallas te digo qué tocaste; al tercer error te marco la respuesta.</p>
     </div>
-    <div class="chips" id="juego-modos" role="group" aria-label="Qué jugar"></div>
+    <div class="elegir" id="juego-elegir">
+      <span class="lbl">Elige un juego</span>
+      <div class="opciones" id="juego-modos" role="group" aria-label="Qué jugar"></div>
+    </div>
+    <div class="jugando" id="juego-jugando" hidden>
+    <div class="modo-actual"><b id="juego-modo"></b><button class="reiniciar" id="juego-cambiar" type="button">Elegir otro juego</button></div>
     <div class="tablero">
       <div class="pregunta" id="juego-pregunta" aria-live="polite"></div>
       <div class="marcador"><span><b id="juego-van">0</b> de <span id="juego-total">0</span></span><span id="juego-reloj">0:00</span>
@@ -361,6 +376,7 @@ if (POSTHOG_CLAVE) {
     <div class="mapa juego-mapa" id="juego-mapa"></div>
     <div class="leyenda-j" aria-hidden="true"><span><i style="background:var(--j0)"></i>A la primera</span><span><i style="background:var(--j1)"></i>1 error</span><span><i style="background:var(--j2)"></i>2 errores</span><span><i style="background:var(--j3)"></i>Con pista</span></div>
     <div class="resultado" id="juego-resultado" hidden></div>
+    </div>
   </div>
 </dialog>
 
@@ -407,8 +423,9 @@ if (POSTHOG_CLAVE) {
     ["sabor", "Más sabor", (a, b) => b.sabor - a.sabor || b.suavidad - a.suavidad],
     ["barato", "Más barato", (a, b) => a.precio - b.precio],
   ];
-  const REL = { igual: "Igual", aproximado: "Aproximado", parte_de: "Parte de", combinacion: "Combinación", formato: "Formato" };
   const REL_PAIS = { igual: "Igual", aproximado: "Parecido", no_hay: "No se vende así" };
+  // Bandera de un país a partir de su código de dos letras (MX → 🇲🇽).
+  const bandera = c => String.fromCodePoint(...[...c].map(l => 0x1F1E6 + l.charCodeAt(0) - 65));
   const PAIS = { US: "Estados Unidos", AR: "Argentina", ES: "España", BR: "Brasil", IT: "Italia", FR: "Francia", UY: "Uruguay", CO: "Colombia", PE: "Perú", CL: "Chile", JP: "Japón" };
   const TIPO_FOTO = { cruda: "Cruda", preparada: "Preparada", cocinando: "En el fuego", plato: "Otra forma de comerla", contexto: "Contexto" };
 
@@ -545,7 +562,9 @@ if (POSTHOG_CLAVE) {
   function figura(f, i) {
     const pie = `<b>${esc(TIPO_FOTO[i.tipo] || i.tipo)}</b>${i.muestra && !["cruda", "preparada"].includes(i.tipo) ? ` · ${esc(i.muestra)}` : ""}` +
       (i.page_url ? ` · <a href="${esc(i.page_url)}" target="_blank" rel="noopener">${esc(host(i.page_url))}</a>` : "");
-    return `<figure class="foto"><div class="ph">${img(i, `${f.nombre}: ${i.muestra || i.tipo}`)}</div><figcaption>${pie}</figcaption></figure>`;
+    // El marco es 4:3; si la foto es más alta, se enseña completa (ver CSS .alta).
+    const alta = i.archivo && i.h > i.w * 0.8;
+    return `<figure class="foto"><div class="ph${alta ? " alta" : ""}"${alta ? ` style="--fondo:url('${esc(i.archivo)}')"` : ""}>${img(i, `${f.nombre}: ${i.muestra || i.tipo}`)}</div><figcaption>${pie}</figcaption></figure>`;
   }
   function galeria(f) {
     const l = fotosDe[f.id] || [];
@@ -561,12 +580,12 @@ if (POSTHOG_CLAVE) {
     const c = f.costumbre; if (!c) return "";
     const filas = [["Dónde", c.lugar], ["En qué partes", c.regiones], ["Cómo", c.como], ["Cuándo", c.cuando]].filter(x => x[1]);
     if (!filas.length) return "";
-    return `<section class="panel"><h4>Cómo se come en México</h4><dl class="datos">${filas.map(([t, v]) => `<dt>${t}</dt><dd>${esc(v)}</dd>`).join("")}</dl></section>`;
+    return `<section class="panel"><h4>Cómo se come en México ${bandera("MX")}</h4><dl class="datos">${filas.map(([t, v]) => `<dt>${t}</dt><dd>${esc(v)}</dd>`).join("")}</dl></section>`;
   }
   function paises(f) {
     const l = f.en_otros_paises; if (!l || !l.length) return "";
     return `<section class="panel"><h4>Cómo le dicen en otros países</h4><ul class="paises">${l.map(p => `<li>
-      <div class="pn"><span class="pais">${esc(PAIS[p.pais] || p.pais)}</span>${p.nombre ? `<span class="nombre">${esc(p.nombre)}</span>` : ""}<span class="chip ${esc(p.relacion)}">${esc(REL_PAIS[p.relacion] || p.relacion)}</span></div>
+      <div class="pn"><span class="pais">${esc(PAIS[p.pais] || p.pais)} ${/^[A-Z]{2}$/.test(p.pais) ? bandera(p.pais) : ""}</span>${p.nombre ? `<span class="nombre">${esc(p.nombre)}</span>` : ""}<span class="chip ${esc(p.relacion)}">${esc(REL_PAIS[p.relacion] || p.relacion)}</span></div>
       ${p.otros && p.otros.length ? `<p class="nota">También: ${esc(p.otros.join(", "))}</p>` : ""}
       ${p.nota ? `<p class="nota">${esc(p.nota)}</p>` : ""}</li>`).join("")}</ul></section>`;
   }
@@ -625,7 +644,7 @@ if (POSTHOG_CLAVE) {
         ${f.mx.length ? `<p class="aka">En México también: ${esc(f.mx.join(" · "))}</p>` : ""}
         <div class="etiquetas">${precio(f.precio)}<span class="chip">${esc(f.tiempo)}</span></div>
       </div>
-      ${hermanos.length ? `<div class="hermanos"><span class="lbl">Mismo músculo en México</span><div class="links">${hermanos.map(x => `<button type="button" data-id="${x.id}">${esc(x.nombre)}</button>`).join("")}</div></div>` : ""}
+      ${hermanos.length ? `<div class="hermanos"><span class="lbl">${f.universal.length > 1 ? "De los mismos músculos" : "Del mismo músculo"} también ${hermanos.length > 1 ? "salen" : "sale"}</span><div class="links">${hermanos.map(x => `<button type="button" data-id="${x.id}">${esc(x.nombre)}</button>`).join("")}</div></div>` : ""}
       <p class="desc">${esc(f.descripcion)}</p>
       ${cultura.length === 2 ? `<div class="cols">${cultura.map(c => `<div>${c}</div>`).join("")}</div>` : cultura.join("")}
       <section><h4>Dónde está en la res</h4><figure class="mapa mapa-ficha"><div class="lienzo">${mapa.replaceAll("silueta", "f-silueta")}</div><figcaption></figcaption></figure></section>
@@ -640,10 +659,6 @@ if (POSTHOG_CLAVE) {
         <div>
           ${f.falsos ? `<section><h4>Se confunde con</h4><p class="texto">${esc(f.falsos)}</p></section>` : ""}
           ${f.variantes ? `<section><h4>Variantes regionales</h4><p class="texto">${esc(f.variantes)}</p></section>` : ""}
-          <section><h4>Qué músculo es</h4>
-            <p class="texto" style="margin-bottom:8px">Relación con el catálogo universal: <b>${esc(REL[f.relacion] || f.relacion)}</b></p>
-            <ul class="unis">${f.universal.map(u => uni[u] ? `<li><b class="num">${u}</b> ${esc(uni[u].nombre_es)} <span class="muted">· ${esc(uni[u].nombre_en)} · <i>${esc(uni[u].musculo)}</i></span></li>` : `<li>${u}</li>`).join("")}</ul>
-          </section>
         </div>
       </div>
       ${video(f)}
@@ -656,11 +671,11 @@ if (POSTHOG_CLAVE) {
     adaptar(fig);
     dlg.scrollTop = 0;
   }
-  // Al pasar el mouse por una zona del mapa se ve qué músculo es.
+  // Al pasar el mouse por una zona del mapa se ve qué es (sin códigos internos).
   const SVGNS = "http://www.w3.org/2000/svg";
   function titular(svg) {
     svg.querySelectorAll("[data-u]").forEach(el => {
-      const t = el.dataset.u.split(" ").filter(u => uni[u]).map(u => `${u} · ${uni[u].nombre_es}`).join(" / ");
+      const t = el.dataset.u.split(" ").filter(u => uni[u]).map(u => uni[u].nombre_es).join(" / ");
       if (!t) return;
       const ti = document.createElementNS(SVGNS, "title");
       ti.textContent = (el.dataset.pieza ? el.dataset.pieza.replace(" ", " / ") + ": " : "") + t;
@@ -679,9 +694,8 @@ if (POSTHOG_CLAVE) {
     const dentro = on.length > 0 && on.every(el => el.classList.contains("int"));
     const mixto = !dentro && on.some(el => el.classList.contains("int"));
     fig.classList.toggle("dentro", dentro);
-    const nombres = f.universal.map(u => uni[u] ? esc(uni[u].nombre_es) : u).join(" + ");
     fig.querySelector("figcaption").innerHTML =
-      `En color: <b>${nombres}</b>.` + (f.zonas.length ? ` Zona de la res: <b>${esc(f.zonas.join(" y "))}</b>.` : "") +
+      `En color: <b>${esc(f.nombre)}</b>.` + (f.zonas.length ? ` ${f.zonas.length > 1 ? "Zonas" : "Zona"} de la res: <b>${esc(enProsa(f.zonas))}</b>.` : "") +
       (dentro ? " Va por dentro: no se ve desde afuera." : mixto ? " Lo punteado va por dentro." : "") + " Dibujo esquemático.";
   }
 
@@ -993,7 +1007,10 @@ if (POSTHOG_CLAVE) {
     medir("juego_empezado", { modo: id });
     document.getElementById("juego-total").textContent = J.total;
     document.getElementById("juego-resultado").hidden = true;
-    document.querySelectorAll("#juego-modos button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === id));
+    document.getElementById("juego-modo").textContent = modo.nombre;
+    document.getElementById("juego-elegir").hidden = true;
+    document.getElementById("juego-jugando").hidden = false;
+    juegoDlg.scrollTop = 0;
     clearInterval(reloj);
     reloj = setInterval(() => { document.getElementById("juego-reloj").textContent = mmss(performance.now() - J.inicio); }, 250);
     decir("");
@@ -1066,26 +1083,37 @@ if (POSTHOG_CLAVE) {
         ? `<button type="button" data-id="${h.q.ficha.id}">${esc(h.q.nombre)}</button>`
         : `<button type="button" data-zona="${esc(h.q.zona)}">${esc(h.q.nombre)}</button>`).join("")}</div></div>` : `<div>Sin errores. ¡Te la sabes!</div>`}
       <div class="acciones"><button class="principal" type="button" data-otra="${J.modo.id}">Jugar de nuevo</button>
-        ${JUEGOS.filter(m => m.id !== J.modo.id).map(m => `<button class="reiniciar" type="button" data-otra="${m.id}">${esc(m.nombre)}</button>`).join("")}</div>`;
+        <button class="reiniciar" type="button" data-elegir="1">Elegir otro juego</button></div>`;
     r.hidden = false;
     r.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 
-  document.getElementById("juego-modos").innerHTML = JUEGOS.map(m => `<button type="button" data-v="${m.id}" aria-pressed="false">${esc(m.nombre)}</button>`).join("");
+  // Lista en prosa: "A, B y C" ("e" antes de i/hi: "y Hígado" → "e Hígado").
+  const enProsa = l => l.length < 2 ? (l[0] || "") : `${l.slice(0, -1).join(", ")} ${/^h?i(?!e)/i.test(l.at(-1)) ? "e" : "y"} ${l.at(-1)}`;
+  function elegirJuego() {
+    if (!partes.length) montarJuego();
+    clearInterval(reloj);
+    J = null;
+    document.getElementById("juego-modos").innerHTML = JUEGOS.map(m => `<button class="opcion" type="button" data-v="${m.id}">
+      <b>${esc(m.nombre)}</b><span>${esc(enProsa(preguntasDe(m.id).map(q => etiqueta(q.nombre))))}.</span></button>`).join("");
+    document.getElementById("juego-jugando").hidden = true;
+    document.getElementById("juego-elegir").hidden = false;
+    juegoDlg.scrollTop = 0;
+  }
   document.getElementById("juego-modos").addEventListener("click", e => { const b = e.target.closest("button"); if (b) empezar(b.dataset.v); });
-  document.getElementById("juego-reiniciar").addEventListener("click", () => empezar(J ? J.modo.id : "zonas"));
+  document.getElementById("juego-cambiar").addEventListener("click", elegirJuego);
+  document.getElementById("juego-reiniciar").addEventListener("click", () => { if (J) empezar(J.modo.id); });
   document.getElementById("juego-resultado").addEventListener("click", e => {
     const b = e.target.closest("button"); if (!b) return;
     if (b.dataset.otra) return empezar(b.dataset.otra);
+    if (b.dataset.elegir) return elegirJuego();
     if (b.dataset.id) return abrir(b.dataset.id, "juego");
     // Una zona para repasar lleva al catálogo filtrado por esa zona.
     if (b.dataset.zona) { cerrarCapa(juegoDlg); estado.zona = b.dataset.zona; pintar(); document.getElementById("grid").scrollIntoView({ behavior: "smooth" }); }
   });
   function abrirJuego() {
     abrirCapa(juegoDlg, "#jugar");
-    if (!partes.length) montarJuego();
-    adaptarJuego();
-    empezar(J ? J.modo.id : "zonas");
+    elegirJuego();
   }
   document.getElementById("abrir-juego").addEventListener("click", abrirJuego);
   document.getElementById("cerrar-juego").addEventListener("click", () => cerrarCapa(juegoDlg));
