@@ -44,13 +44,12 @@ a { color: var(--accent); }
 button, select { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.lbl, .eyebrow, dt, .cap { font-stretch: 75%; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: 11.5px; color: var(--muted); }
+.lbl, dt, .cap { font-stretch: 75%; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: 11.5px; color: var(--muted); }
 .num { font-variant-numeric: tabular-nums; }
 
 /* Encabezado */
 .top { border-bottom: 3px solid var(--accent); background: var(--surface); }
 .top-in { padding-block: 28px 22px; display: grid; gap: 10px; }
-.eyebrow { margin: 0; color: var(--accent); }
 h1 { font-family: var(--display); font-weight: 400; font-size: clamp(34px, 6vw, 56px); line-height: 1; margin: 0; letter-spacing: .01em; text-wrap: balance; }
 .lede { margin: 0; max-width: 62ch; color: var(--muted); font-size: 16px; }
 .stats { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 14px; color: var(--muted); }
@@ -91,9 +90,10 @@ h1 { font-family: var(--display); font-weight: 400; font-size: clamp(34px, 6vw, 
 .aka { margin: 0; font-size: 13px; color: var(--muted); min-height: 1.5em; }
 .barras { display: grid; gap: 4px; margin: 6px 0 0; padding-top: 10px; border-top: 1px solid var(--line); font-size: 13px; }
 .barras div { display: grid; grid-template-columns: 70px auto; align-items: center; gap: 8px; }
-.cf { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); margin-top: 6px; }
+.cf { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); margin-top: 6px; }
 .price { font-weight: 800; letter-spacing: .04em; color: var(--ink); }
 .price .off { color: var(--line); }
+.price .kilo { margin-left: 6px; font-weight: 500; letter-spacing: 0; color: var(--muted); }
 .chip { display: inline-block; font-size: 11.5px; font-weight: 700; font-stretch: 80%; text-transform: uppercase; letter-spacing: .05em; padding: 2px 7px; border-radius: 2px; background: var(--tile-soft); color: var(--tile); }
 .chip.media, .chip.aproximado { background: var(--warn-soft); color: var(--warn); }
 .chip.baja, .chip.no_hay { background: var(--accent-soft); color: var(--accent); }
@@ -132,9 +132,9 @@ h4 { margin: 0 0 8px; font-stretch: 75%; font-weight: 800; text-transform: upper
 .sq i.on { background: var(--accent); }
 .barras .sq i { width: 12px; height: 12px; }
 .nota-escala { margin: 6px 0 0; font-size: 12.5px; color: var(--muted); }
-.datos { display: grid; grid-template-columns: max-content 1fr; gap: 8px 14px; margin: 0; font-size: 14px; }
-.datos dt { padding-top: 2px; font-size: 11px; }
-.datos dd { margin: 0; min-width: 0; }
+.platillos { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 14px; }
+.platillos li { display: grid; gap: 2px; }
+.platillos span { color: var(--muted); }
 .paises { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 14px; }
 .paises li { display: grid; gap: 2px; }
 .paises .pn { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; }
@@ -307,7 +307,6 @@ if (POSTHOG_CLAVE) {
 
 <header class="top">
   <div class="wrap top-in">
-    <p class="eyebrow">Piloto México · borrador para revisión</p>
     <h1>Cortes de res</h1>
     <p class="lede">Los cortes como se piden en México: de dónde salen, cómo se comen, cuánto cuestan y cómo se llaman en otros países.</p>
     <ul class="stats" id="stats"></ul>
@@ -351,7 +350,7 @@ if (POSTHOG_CLAVE) {
 </main>
 
 <footer>
-  <div class="wrap"><p>Generado desde <code>output/data/mx_fichas.json</code> con <code>build_web.py</code>. Suavidad y sabor van del 1 al 5 y suponen el corte preparado como se acostumbra en México. Precio de súper, octubre 2026 (MXN por kilo): $ menos de 200 · $$ 200–270 · $$$ 270–340 · $$$$ 340–480 · $$$$$ más de 480. Uso interno: muchas fotos no tienen licencia para publicarse.</p></div>
+  <div class="wrap"><p>Suavidad y sabor van del 1 al 5 y suponen el corte preparado como se acostumbra en México. Precio de súper, octubre 2026 (MXN por kilo): $ menos de 200 · $$ 200–270 · $$$ 270–340 · $$$$ 340–480 · $$$$$ más de 480.</p></div>
 </footer>
 
 <dialog id="juego" class="juego-dlg" aria-labelledby="juego-t">
@@ -508,7 +507,15 @@ if (POSTHOG_CLAVE) {
     if (i && i.archivo) return `<img src="${esc(i.archivo)}" alt="${esc(alt)}" loading="lazy">`;
     return `<div class="nofoto">Sin foto</div>`;
   }
-  const precio = p => `<span class="price" aria-label="Precio ${p} de 5">${"$".repeat(p)}<span class="off">${"$".repeat(5 - p)}</span></span>`;
+  // El precio se explica solo: los signos ($ a $$$$$) y el rango del kilo (precio de súper, octubre 2026; ver specs/ficha.md).
+  // Qué tan segura es la ficha: solo se avisa al final cuando no es "alta" (el founder no entendía la etiqueta arriba del nombre).
+  const CONFIANZA = {
+    media: "Ojo: el nombre o el corte cambia según la región o la carnicería, así que algunos datos pueden variar donde compres.",
+    baja: "Ojo: este nombre se usa para cosas distintas y esta ficha todavía se está revisando.",
+  };
+  const KILO = ["", "menos de $200", "$200 a $270", "$270 a $340", "$340 a $480", "más de $480"];
+  const KILO_CORTO = ["", "< $200/kg", "$200–270/kg", "$270–340/kg", "$340–480/kg", "> $480/kg"];
+  const precio = (p, corto) => `<span class="price" title="Precio de súper por kilo, octubre de 2026" aria-label="Precio: ${KILO[p]} el kilo">${"$".repeat(p)}<span class="off">${"$".repeat(5 - p)}</span><span class="kilo">${corto ? KILO_CORTO[p] : KILO[p] + " el kilo"}</span></span>`;
   const sq = v => `<span class="sq" aria-hidden="true">${[1, 2, 3, 4, 5].map(i => `<i class="${i <= v ? "on" : ""}"></i>`).join("")}</span>`;
 
   function pintar() {
@@ -547,7 +554,7 @@ if (POSTHOG_CLAVE) {
             <div><span>Suavidad</span>${sq(f.suavidad)}</div>
             <div><span>Sabor</span>${sq(f.sabor)}</div>
           </div>
-          <div class="cf">${precio(f.precio)}<span class="chip">${esc(f.tiempo)}</span></div>
+          <div class="cf">${precio(f.precio, true)}<span class="chip">${esc(f.tiempo)}</span></div>
         </div>
       </button>`).join("");
   }
@@ -576,11 +583,13 @@ if (POSTHOG_CLAVE) {
   const rate = (n, v) => `<div class="rate"><span>${n}</span>${sq(v)}<b>${v}</b></div>`;
   const host = u => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (e) { return u; } };
 
+  // "Cómo se come": la lista de platillos típicos con ese corte, del más común al menos común. La costumbre (dónde, cuándo…)
+  // se queda en los datos y en el Excel, pero no se muestra (lo pidió el founder: "straightforward, sin tanto rollo").
   function costumbre(f) {
-    const c = f.costumbre; if (!c) return "";
-    const filas = [["Dónde", c.lugar], ["En qué partes", c.regiones], ["Cómo", c.como], ["Cuándo", c.cuando]].filter(x => x[1]);
-    if (!filas.length) return "";
-    return `<section class="panel"><h4>Cómo se come en México ${bandera("MX")}</h4><dl class="datos">${filas.map(([t, v]) => `<dt>${t}</dt><dd>${esc(v)}</dd>`).join("")}</dl></section>`;
+    const l = f.platillos || [];
+    if (!l.length) return "";
+    return `<section class="panel"><h4>Cómo se come en México ${bandera("MX")}</h4><ul class="platillos">${l.map(p =>
+      `<li><b>${esc(p.nombre)}</b>${p.nota ? `<span>${esc(p.nota)}</span>` : ""}</li>`).join("")}</ul></section>`;
   }
   function paises(f) {
     const l = f.en_otros_paises; if (!l || !l.length) return "";
@@ -634,12 +643,11 @@ if (POSTHOG_CLAVE) {
     medir("ficha_abierta", { corte: id, nombre: f.nombre, origen });
     const hermanos = fichas.filter(x => x.id !== f.id && x.universal.some(u => f.universal.includes(u)));
     const prueba = (f.si_te_gusta || []).filter(x => byId[x]);
-    const fuentes = [...new Set([...(f.fuentes || []), ...(f.costumbre?.fuentes || []), ...(f.fuentes_paises || [])])];
+    const fuentes = [...new Set([...(f.fuentes || []), ...(f.platillos || []).flatMap(p => p.fuentes || []), ...(f.costumbre?.fuentes || []), ...(f.fuentes_paises || [])])];
     const cultura = [costumbre(f), paises(f)].filter(Boolean);
     cuerpo.innerHTML = `<div class="ficha">
       ${galeria(f)}
       <div class="cabeza">
-        <span class="lbl num">${f.id} · confianza <span class="chip ${esc(f.confianza)}">${esc(f.confianza)}</span></span>
         <h2 id="ficha-nombre">${esc(f.nombre)}</h2>
         ${f.mx.length ? `<p class="aka">En México también: ${esc(f.mx.join(" · "))}</p>` : ""}
         <div class="etiquetas">${precio(f.precio)}<span class="chip">${esc(f.tiempo)}</span></div>
@@ -663,6 +671,7 @@ if (POSTHOG_CLAVE) {
       </div>
       ${video(f)}
       ${gente(f)}
+      ${CONFIANZA[f.confianza] ? `<p class="texto confianza">${CONFIANZA[f.confianza]}</p>` : ""}
       ${fuentes.length ? `<section><h4>Fuentes</h4><ol class="fuentes">${fuentes.map(u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(host(u))}</a></li>`).join("")}</ol></section>` : ""}
     </div>`;
     const fig = cuerpo.querySelector(".mapa-ficha");
@@ -766,24 +775,18 @@ if (POSTHOG_CLAVE) {
   }
   const etiqueta = n => n.replace(/\s*\([^)]*\)/g, "").replace(/ de res$/, "").trim();
 
-  // Pone el nombre del corte principal en cada zona. Por fuera, un corte se rotula una sola vez: en su zona más grande
-  // (o en todas las que son el mismo músculo, como los dos chambaretes). Por dentro se rotula cada pieza (la arrachera son dos).
+  // Pone el nombre del corte principal en cada zona que se puede tocar, aunque el corte ocupe varias (la espaldilla son dos,
+  // la arrachera también): una zona sin nombre que abre una ficha confunde. Las zonas sin corte quedan vacías y no hacen nada.
   function rotular(svg) {
     const capa = document.createElementNS(SVGNS, "g");
     capa.setAttribute("class", "lbls");
     svg.appendChild(capa);
     const zonas = [...svg.querySelectorAll("[data-u]")].filter(el => el.dataset.u.trim())
-      .map(el => ({ el, cortes: cortesDeZona(el), area: area(el) }));
-    const grupos = {};
-    zonas.forEach(z => { if (z.cortes.length) (grupos[z.cortes[0].id] ||= []).push(z); });
-    Object.values(grupos).forEach(g => {
-      const mayor = g.reduce((a, b) => (b.area > a.area ? b : a));
-      g.forEach(z => { z.rotular = z.el.classList.contains("int") || z.el.dataset.u === mayor.el.dataset.u; });
-    });
+      .map(el => ({ el, cortes: cortesDeZona(el) }));
     svg.querySelectorAll('[data-u=""]').forEach(el => el.classList.add("vacia"));
     zonas.forEach(z => {
       if (!z.cortes.length) { z.el.classList.add("vacia"); return; }
-      if (!z.rotular || !z.el.dataset.x) return;
+      if (!z.el.dataset.x) return;
       const { x, y } = z.el.dataset;
       const t = document.createElementNS(SVGNS, "text");
       t.setAttribute("class", "lbz " + (z.el.classList.contains("int") ? "int-l" : "ext-l"));
