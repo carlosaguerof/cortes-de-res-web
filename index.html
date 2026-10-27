@@ -480,22 +480,22 @@ if (POSTHOG_CLAVE) {
     const b = e.target.closest("button"); if (!b) return;
     estado.cocina = b.dataset.v;
     pintar();
-    medir("filtro", { filtro: "cocina", valor: estado.cocina });
+    medir("filtro_cambiado", { filtro: "cocina", valor: estado.cocina });
   });
-  zonaEl.addEventListener("change", () => { estado.zona = zonaEl.value; pintar(); medir("filtro", { filtro: "zona", valor: estado.zona }); });
-  precioEl.addEventListener("change", () => { estado.precio = precioEl.value; pintar(); medir("filtro", { filtro: "precio", valor: estado.precio }); });
-  ordenEl.addEventListener("change", () => { estado.orden = ordenEl.value; pintar(); medir("filtro", { filtro: "orden", valor: estado.orden }); });
+  zonaEl.addEventListener("change", () => { estado.zona = zonaEl.value; pintar(); medir("filtro_cambiado", { filtro: "zona", valor: estado.zona }); });
+  precioEl.addEventListener("change", () => { estado.precio = precioEl.value; pintar(); medir("filtro_cambiado", { filtro: "precio", valor: estado.precio }); });
+  ordenEl.addEventListener("change", () => { estado.orden = ordenEl.value; pintar(); medir("filtro_cambiado", { filtro: "orden", valor: estado.orden }); });
   // La búsqueda se registra cuando la persona deja de escribir, no letra por letra.
   let esperaBusqueda;
   document.getElementById("q").addEventListener("input", e => {
     estado.q = e.target.value; pintar();
     clearTimeout(esperaBusqueda);
     esperaBusqueda = setTimeout(() => {
-      if (estado.q.trim()) medir("busqueda", { texto: estado.q.trim(), resultados: document.querySelectorAll("#grid .card").length });
+      if (estado.q.trim()) medir("busqueda_hecha", { texto: estado.q.trim(), resultados: document.querySelectorAll("#grid .card").length });
     }, 1500);
   });
   document.getElementById("limpiar").addEventListener("click", () => {
-    medir("filtro", { filtro: "limpiar" });
+    medir("filtro_cambiado", { filtro: "limpiar" });
     Object.assign(estado, { q: "", cocina: "todos", zona: "todas", precio: "todos" });
     document.getElementById("q").value = "";
     pintar();
@@ -635,7 +635,7 @@ if (POSTHOG_CLAVE) {
   const ytEmbed = id => `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0`;
   function reproducir(caja, e) {
     e.preventDefault();
-    medir("video", { corte: fichaActual, video: caja.dataset.yt });
+    medir("video_abierto", { corte: fichaActual, video: caja.dataset.yt });
     caja.innerHTML = `<iframe src="${ytEmbed(caja.dataset.yt)}" title="Video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
   }
 
