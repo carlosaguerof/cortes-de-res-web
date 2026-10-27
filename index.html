@@ -135,6 +135,7 @@ h4 { margin: 0 0 8px; font-stretch: 75%; font-weight: 800; text-transform: upper
 .platillos { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 14px; }
 .platillos li { display: grid; gap: 2px; }
 .platillos span { color: var(--muted); }
+.variantes { display: grid; gap: 6px; }
 /* Un platillo que tiene ficha propia (la machaca, en la carne seca) es un enlace a esa ficha. */
 .platillos .ir { justify-self: start; border: none; background: none; padding: 0; font: inherit; font-weight: 700; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 .paises { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 14px; }
@@ -586,6 +587,13 @@ if (POSTHOG_CLAVE) {
   const rate = (n, v) => `<div class="rate"><span>${n}</span>${sq(v)}<b>${v}</b></div>`;
   const host = u => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (e) { return u; } };
 
+  // Variantes regionales: una línea por lugar ("Lugar: texto"); el lugar va en negritas y cada uno en su renglón.
+  function variantes(texto) {
+    return texto.split("\n").map(l => {
+      const m = l.match(/^([A-ZÁÉÍÓÚÑ'][^.:;]{0,80}?):\s([\s\S]*)$/);
+      return `<p class="texto">${m ? `<b>${esc(m[1])}:</b> ${esc(m[2])}` : esc(l)}</p>`;
+    }).join("");
+  }
   // "Cómo se come": la lista de platillos típicos con ese corte, del más común al menos común. La costumbre (dónde, cuándo…)
   // se queda en los datos y en el Excel, pero no se muestra (lo pidió el founder: "straightforward, sin tanto rollo").
   function costumbre(f) {
@@ -669,7 +677,7 @@ if (POSTHOG_CLAVE) {
         </div>
         <div>
           ${f.falsos ? `<section><h4>Se confunde con</h4><p class="texto">${esc(f.falsos)}</p></section>` : ""}
-          ${f.variantes ? `<section><h4>Variantes regionales</h4><p class="texto">${esc(f.variantes)}</p></section>` : ""}
+          ${f.variantes ? `<section><h4>Variantes regionales</h4><div class="variantes">${variantes(f.variantes)}</div></section>` : ""}
         </div>
       </div>
       ${video(f)}
