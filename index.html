@@ -799,8 +799,18 @@ if (POSTHOG_CLAVE) {
   fichas.forEach(f => f.universal.forEach(u => {
     const r = (PRI[f.relacion] ?? 5) * 10 + f.universal.length;
     (cortesPorU[u] ||= []).push({ f, r });
-    (uni[u]?.componentes || []).forEach(c => (cortesPorU[c] ||= []).push({ f, r: r + 5 }));
+    (uni[u]?.componentes || []).forEach(c => (cortesPorU[c] ||= []).push({ f, r: r + 5, via: true }));
   }));
+  // Cortes que llevan esta parte solo junto con otras: formatos (molida, bistec, retazo) o compuestos que la incluyen
+  // (la cabeza de res lleva el cachete y el ojo; el T-bone, el New York y el filete).
+  function tambienEn(el) {
+    const directos = new Set(), todos = new Set();
+    el.dataset.u.split(" ").filter(Boolean).forEach(u => (cortesPorU[u] || []).forEach(({ f, via }) => {
+      todos.add(f.id);
+      if (!via && f.relacion !== "formato") directos.add(f.id);
+    }));
+    return new Set([...todos].filter(id => !directos.has(id)));
+  }
   function cortesDeZona(el) {
     const mejor = new Map();
     // El primer U-ID de la zona es su músculo propio; los demás (p. ej. tuétano en el chambarete) cuentan después.
@@ -888,10 +898,15 @@ if (POSTHOG_CLAVE) {
   const exploraIn = document.getElementById("explora-in");
   // Tocar una zona siempre muestra qué sale de ahí, aunque sea un solo corte: así todas se comportan igual y se puede
   // anticipar qué va a pasar (lo notó el founder: el ojo y el cachete preguntaban y la trompa abría directo).
+  // Dos grupos, para que no parezca que el cachete "puede traer" cabeza de res: lo que sale de esta parte, y lo que
+  // también la lleva junto con otras partes. El corte principal de la zona siempre va en el primero.
   function elegir(el, px, py) {
     const cortes = cortesZona.get(el);
-    elige.innerHTML = `<span class="lbl">De esta parte ${cortes.length > 1 ? "salen" : "sale"}</span><div class="links">${cortes.map(f =>
-      `<button type="button" data-id="${f.id}">${esc(f.nombre)}</button>`).join("")}</div>`;
+    const tambien = tambienEn(el); tambien.delete(cortes[0].id);
+    const propios = cortes.filter(f => !tambien.has(f.id)), otros = cortes.filter(f => tambien.has(f.id));
+    const grupo = (titulo, l) => l.length ? `<span class="lbl">${titulo}</span><div class="links">${l.map(f =>
+      `<button type="button" data-id="${f.id}">${esc(f.nombre)}</button>`).join("")}</div>` : "";
+    elige.innerHTML = grupo(`De esta parte ${propios.length > 1 ? "salen" : "sale"}`, propios) + grupo("También va en", otros);
     elige.hidden = false;
     const caja = exploraIn.getBoundingClientRect();
     elige.style.left = Math.max(8, Math.min(px - caja.left - elige.offsetWidth / 2, caja.width - elige.offsetWidth - 8)) + "px";
