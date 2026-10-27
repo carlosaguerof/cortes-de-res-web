@@ -424,7 +424,8 @@ if (POSTHOG_CLAVE) {
     ["sabor", "Más sabor", (a, b) => b.sabor - a.sabor || b.suavidad - a.suavidad],
     ["barato", "Más barato", (a, b) => a.precio - b.precio],
   ];
-  const REL_PAIS = { igual: "Igual", aproximado: "Parecido", no_hay: "No se vende así" };
+  // La etiqueta habla de la carne, no del nombre: "Igual" a secas junto a otro nombre se leía como "se dice igual".
+  const REL_PAIS = { igual: "Mismo corte", aproximado: "Corte parecido", no_hay: "No se vende así" };
   // Bandera de un país a partir de su código de dos letras (MX → 🇲🇽).
   const bandera = c => String.fromCodePoint(...[...c].map(l => 0x1F1E6 + l.charCodeAt(0) - 65));
   const PAIS = { US: "Estados Unidos", AR: "Argentina", ES: "España", BR: "Brasil", IT: "Italia", FR: "Francia", UY: "Uruguay", CO: "Colombia", PE: "Perú", CL: "Chile", JP: "Japón" };
