@@ -387,7 +387,7 @@ if (POSTHOG_CLAVE) {
 <main>
   <div class="wrap filtros">
     <label class="search"><span class="sr">Buscar corte</span>
-      <input id="q" type="search" placeholder="Busca un corte o un nombre de otro país: arrachera, skirt, entraña…" autocomplete="off">
+      <input id="q" type="search" placeholder="Busca un corte o un platillo: palomilla, skirt, carne asada…" autocomplete="off">
     </label>
     <div class="contents" id="f-visibles"></div>
     <div class="fila">
@@ -581,6 +581,10 @@ if (POSTHOG_CLAVE) {
     f.nombre, ...f.otros_nombres, ...(f.en_otros_paises || []).flatMap(p => [p.nombre, ...(p.otros || [])]),
     ...f.universal.flatMap(u => [uni[u]?.nombre_es, uni[u]?.nombre_en]),
   ].filter(Boolean).join(" "))]));
+  // El buscador también encuentra por platillo: "carne asada", "chile colorado" o "birria" llevan a los cortes con que se hacen.
+  // Buscar "carne asada" daba cero resultados, y es lo primero que buscaría alguien de Sonora (revisión del 2026-10-29).
+  const platillosDe = Object.fromEntries(fichas.map(f => [f.id, (f.platillos || []).map(p => [p.nombre, norm(p.nombre)])]));
+  const platillosCon = (f, q) => platillosDe[f.id].filter(([, n]) => n.includes(q)).map(([t]) => t);
 
   function img(i, alt) {
     if (i && i.archivo) return `<img src="${esc(i.archivo)}" alt="${esc(alt)}" loading="lazy">`;
@@ -597,7 +601,7 @@ if (POSTHOG_CLAVE) {
 
   const cumple = (f, g) => !estado.sel[g.k].size || [...estado.sel[g.k]].some(v => g.es(f, v));
   // Al buscar, primero el corte que se llama así: nombre igual, luego que empieza así, que tiene una palabra que empieza así,
-  // que lo contiene, sus otros nombres en México y al final lo que coincide por otro país o por músculo.
+  // que lo contiene, sus otros nombres en México, lo que coincide por otro país o por músculo y al final por platillo.
   // Dentro de cada grupo manda el orden elegido. Antes salía de la A a la Z y "Diezmillo" quedaba después de "Agujas norteñas".
   function relevancia(f, q) {
     const n = norm(corto(f.nombre));
@@ -606,11 +610,12 @@ if (POSTHOG_CLAVE) {
     if (n.split(/[\s-]+/).some(p => p.startsWith(q))) return 2;
     if (n.includes(q)) return 3;
     if (f.otros_nombres.some(o => norm(o).includes(q))) return 4;
-    return 5;
+    if (indice[f.id].includes(q)) return 5;
+    return 6;
   }
   function pintar() {
     const q = norm(estado.q.trim());
-    const base = fichas.filter(f => !q || indice[f.id].includes(q));
+    const base = fichas.filter(f => !q || indice[f.id].includes(q) || platillosCon(f, q).length);
     const lista = base.filter(f => GRUPOS.every(g => cumple(f, g)));
     const orden = ORDENES.find(o => o[0] === estado.orden)[2];
     const rel = Object.fromEntries(lista.map(f => [f.id, q ? relevancia(f, q) : 0]));
@@ -642,13 +647,21 @@ if (POSTHOG_CLAVE) {
     document.getElementById("limpiar").hidden = !activos.length;
 
     const grid = document.getElementById("grid");
-    if (!lista.length) { grid.innerHTML = `<p class="vacio">Ningún corte cumple con todo eso. Prueba quitando un filtro.</p>`; return; }
+    // Sin resultados, el aviso dice qué pasó: no se encontró lo que buscó, o los filtros dejaron la lista vacía.
+    if (!lista.length) {
+      const hayFiltros = GRUPOS.some(g => estado.sel[g.k].size);
+      const buscado = `«${esc(estado.q.trim())}»`;
+      grid.innerHTML = `<p class="vacio">${!q ? "Ningún corte cumple con todo eso. Prueba quitando un filtro."
+        : hayFiltros ? `No encontramos ${buscado} con los filtros que elegiste. Prueba quitando un filtro, o busca con otro nombre o con un platillo, como «carne asada».`
+        : `No encontramos ${buscado}. Prueba con otro nombre del corte o con un platillo, como «carne asada» o «birria».`}</p>`;
+      return;
+    }
     grid.innerHTML = lista.map(f => `
       <button class="card" type="button" data-id="${f.id}">
         <div class="ph">${img((fotosDe[f.id] || []).find(i => i.tipo === "preparada"), f.nombre + " preparado")}</div>
         <div class="cb">
           <h3>${esc(f.nombre)}</h3>
-          <p class="aka">${esc(f.mx.slice(0, 3).map(corto).join(" · "))}</p>
+          <p class="aka">${q && rel[f.id] === 6 ? `Se usa en: ${esc(platillosCon(f, q).join(" · "))}` : esc(f.mx.slice(0, 3).map(corto).join(" · "))}</p>
           <div class="barras">${ATRIBUTOS.map(a =>
             `<div${a.k === estado.orden ? ` class="ord"` : ""}><span>${a.corto}</span>${sq(f[a.k])}<span class="sr">${f[a.k]} de 5</span></div>`).join("")}
           </div>
