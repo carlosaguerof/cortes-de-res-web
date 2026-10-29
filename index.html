@@ -113,7 +113,8 @@ h1 { font-family: var(--display); font-weight: 400; font-size: clamp(34px, 6vw, 
 .aka { margin: 0; font-size: 13px; color: var(--muted); min-height: 1.5em; }
 .barras { display: grid; gap: 4px; margin: 6px 0 0; padding-top: 10px; border-top: 1px solid var(--line); font-size: 13px; }
 .barras div { display: grid; grid-template-columns: 84px auto; align-items: center; gap: 8px; }
-/* La calificación por la que se ordena se marca en la tarjeta: así se entiende el orden. */
+/* La tarjeta muestra las cinco calificaciones, como la ficha (lo pidió el founder el 2026-10-29).
+   La calificación por la que se ordena se marca: así se entiende el orden. */
 .barras div.ord span { color: var(--ink); font-weight: 700; }
 .cf { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); margin-top: 6px; }
 .price { font-weight: 800; letter-spacing: .04em; color: var(--ink); }
@@ -640,8 +641,6 @@ if (POSTHOG_CLAVE) {
       `<button type="button" data-g="${g}" data-v="${esc(v)}" aria-label="Quitar filtro: ${esc(t)}">${esc(t)}</button>`).join("");
     document.getElementById("limpiar").hidden = !activos.length;
 
-    // La tarjeta muestra sabor y suavidad, y además la calificación por la que se filtra u ordena.
-    const enUso = ATRIBUTOS.filter(a => a.k === "sabor" || a.k === "suavidad" || a.k === estado.orden || estado.sel[a.k].size);
     const grid = document.getElementById("grid");
     if (!lista.length) { grid.innerHTML = `<p class="vacio">Ningún corte cumple con todo eso. Prueba quitando un filtro.</p>`; return; }
     grid.innerHTML = lista.map(f => `
@@ -650,7 +649,7 @@ if (POSTHOG_CLAVE) {
         <div class="cb">
           <h3>${esc(f.nombre)}</h3>
           <p class="aka">${esc(f.mx.slice(0, 3).map(corto).join(" · "))}</p>
-          <div class="barras">${enUso.map(a =>
+          <div class="barras">${ATRIBUTOS.map(a =>
             `<div${a.k === estado.orden ? ` class="ord"` : ""}><span>${a.corto}</span>${sq(f[a.k])}<span class="sr">${f[a.k]} de 5</span></div>`).join("")}
           </div>
           <div class="cf">${precio(f.precio, true)}<span class="chip">${esc(f.tiempo)}</span></div>
